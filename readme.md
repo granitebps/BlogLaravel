@@ -22,3 +22,9 @@ Ada juga beberapa fitur yang ditambahkan pada project blog ini, antara lain :
 - [Laravel File Manager](https://github.com/UniSharp/laravel-filemanager).
 - [SweetAlert](https://sweetalert2.github.io/).
 - [AddThis](https://www.addthis.com/).
+
+Untuk menggunakannya silahkan clone atau fork repository ini, lalu jalankan perintah dibawah pada terminal kalian : 
+```
+php artisan migrate
+php artisan db:seed
+```
