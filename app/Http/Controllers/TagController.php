@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use App\Models\TagModel;
 use Illuminate\Support\Facades\Session;
 
@@ -13,8 +11,6 @@ class TagController extends Controller
     // Menampilkan halaman tag
     public function index()
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $data['tag'] = TagModel::get_tag();
         return view('admin.tag.index', $data);
     }
@@ -22,9 +18,7 @@ class TagController extends Controller
     // Menampilkan halaman membuat tag
     public function create()
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
-        return view('admin.tag.create', $data);
+        return view('admin.tag.create');
     }
 
     // Proses membuat tag
@@ -42,8 +36,6 @@ class TagController extends Controller
     // Menampilkan halaman edit tag
     public function edit($id)
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $data['tag'] = TagModel::get_tag_id($id);
         return view('admin.tag.edit', $data);
     }

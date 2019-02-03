@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use App\Models\PostModel;
 use App\Models\CategoryModel;
 use App\Models\TagModel;
@@ -24,8 +22,6 @@ class HomeController extends Controller
     // Menampilkan halaman dashboard admin
     public function index()
     {
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
         $data['post'] = PostModel::get_post();
         $data['message'] = MessageModel::get_message_unread();
         $data['subs'] = EmailModel::get_subs();
@@ -35,7 +31,6 @@ class HomeController extends Controller
     // Menampilkan halaman utama
     public function welcome()
     {
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $data['post'] = PostModel::get_post_publish();
@@ -47,7 +42,6 @@ class HomeController extends Controller
     // Menampilkan halaman per post
     public function show($slug)
     {
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $data['post'] = PostModel::get_post_slug($slug);
@@ -64,7 +58,6 @@ class HomeController extends Controller
     // Menampilkan halaman per category
     public function category($slug)
     {
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $category = CategoryModel::get_category_slug($slug);
@@ -76,7 +69,6 @@ class HomeController extends Controller
     // Menampilkan halaman per tag
     public function tag($slug)
     {
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $tag = TagModel::get_tag_slug($slug);
@@ -90,7 +82,6 @@ class HomeController extends Controller
     {
         $request = $request->all();
         $data['post'] = PostModel::search($request);
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $data['random'] = PostModel::get_post_random();
@@ -100,7 +91,6 @@ class HomeController extends Controller
     // Menampilkan halaman about
     public function about()
     {
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $data['random'] = PostModel::get_post_random();
@@ -110,7 +100,6 @@ class HomeController extends Controller
     // Menampilkan halaman contact
     public function contact()
     {
-        $data['setting'] = SettingModel::get_setting();
         $data['tag'] = TagModel::get_tag();
         $data['category'] = CategoryModel::get_category();
         $data['random'] = PostModel::get_post_random();

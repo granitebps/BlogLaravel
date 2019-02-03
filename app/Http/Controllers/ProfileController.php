@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProfileModel;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
@@ -13,8 +11,6 @@ class ProfileController extends Controller
     // Menampilkan tampilan edit profile
     public function edit()
     {
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
         $data['user'] = ProfileModel::get_user_login();
         return view('admin.profile.profile', $data);
     }
@@ -54,9 +50,7 @@ class ProfileController extends Controller
     // Menampilkan halaman edit password
     public function edit_password()
     {
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
-        return view('admin.profile.change_password', $data);
+        return view('admin.profile.change_password');
     }
 
     // Proses ganti password

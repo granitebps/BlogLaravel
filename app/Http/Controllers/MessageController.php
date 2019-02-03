@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MessageModel;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
@@ -14,8 +12,6 @@ class MessageController extends Controller
     // Menampilkan Pesan
     public function index()
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $data['message'] = MessageModel::get_message();
         return view('admin.message.index', $data);
     }
@@ -23,8 +19,6 @@ class MessageController extends Controller
     // Menampilkan halaman untuk membalas pesan
     public function reply($id)
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $data['message'] = MessageModel::get_message_id($id);
         return view('admin.message.reply', $data);
     }

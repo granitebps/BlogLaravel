@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TaskModel;
-use App\Models\SettingModel;
 use Illuminate\Support\Facades\Session;
 
 class TaskController extends Controller
@@ -12,17 +11,13 @@ class TaskController extends Controller
     // Menampilkan task
     public function index()
     {
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
-        return view('admin.task.index', $data);
+        return view('admin.task.index');
     }
 
     // Menampilkan halaman membuat task
     public function create()
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
-        return view('admin.task.create', $data);
+        return view('admin.task.create');
     }
 
     // Proses membuat task
@@ -43,8 +38,6 @@ class TaskController extends Controller
     public function edit($id)
     {
         $data['task_id'] = TaskModel::get_task_id($id);
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
         return view('admin.task.edit', $data);
     }
 

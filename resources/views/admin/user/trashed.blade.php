@@ -38,7 +38,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td class="text-danger">No Trashed User</td>
+                                        <td colspan="6" class="text-danger text-center">No Trashed User</td>
                                     </tr>
                                 @endif
                             </tbody>

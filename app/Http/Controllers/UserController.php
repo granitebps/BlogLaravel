@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SettingModel;
 use App\Models\User;
-use App\Models\TaskModel;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -13,9 +11,7 @@ class UserController extends Controller
     // Menampilkan halaman user
     public function index()
     {
-        $data['task'] = TaskModel::get_task();
         $data['user'] = User::get_user();
-        $data['setting'] = SettingModel::get_setting();
         return view('admin.user.user', $data);
     }
 
@@ -30,8 +26,6 @@ class UserController extends Controller
     // Menampilkan user yang di trashed
     public function trashed()
     {
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
         $data['user'] = User::get_trashed();
         return view('admin.user.trashed', $data);
     }

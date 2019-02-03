@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
@@ -12,9 +10,7 @@ class SettingController extends Controller
     // Menampilkan tampilan setting
     public function edit()
     {
-        $data['task'] = TaskModel::get_task();
-        $data['setting'] = SettingModel::get_setting();
-        return view('admin.setting.setting', $data);
+        return view('admin.setting.setting');
     }
 
     // Proses Update Setting

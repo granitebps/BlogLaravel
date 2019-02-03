@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use App\Models\CategoryModel;
 use App\Models\TagModel;
 use Illuminate\Support\Facades\Session;
@@ -17,8 +15,6 @@ class PostController extends Controller
     // Menampilkan List Post
     public function index(Request $request)
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $request = $request->all();
         if (!empty($request)) {
             // Search Post
@@ -32,8 +28,6 @@ class PostController extends Controller
     // Menampilkan halaman membuat post
     public function create()
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $data['category'] = CategoryModel::get_category();
         $data['tag'] = TagModel::get_tag();
         return view('admin.post.create', $data);
@@ -79,8 +73,6 @@ class PostController extends Controller
     // Menampilkan halaman edit post
     public function edit($id)
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         $data['category'] = CategoryModel::get_category();
         $data['tag'] = TagModel::get_tag();
         $data['post'] = PostModel::get_post_id($id);
@@ -121,8 +113,6 @@ class PostController extends Controller
     public function trashed()
     {
         $data['post'] = PostModel::trashed_post();
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         return view('admin.post.trashed', $data);
     }
 

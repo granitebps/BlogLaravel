@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SettingModel;
-use App\Models\TaskModel;
 use App\Models\CategoryModel;
 use Illuminate\Support\Facades\Session;
 
@@ -14,17 +12,13 @@ class CategoryController extends Controller
     public function index()
     {
         $data['category'] = CategoryModel::get_category();
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         return view('admin.category.index', $data);
     }
 
     // Menampilkan halaman membuat category
     public function create()
     {
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
-        return view('admin.category.create', $data);
+        return view('admin.category.create');
     }
 
     // Proses membuat category
@@ -44,8 +38,6 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data['category'] = CategoryModel::get_category_id($id);
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
         return view('admin.category.edit', $data);
     }
 
