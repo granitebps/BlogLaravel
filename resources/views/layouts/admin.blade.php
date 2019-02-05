@@ -182,6 +182,18 @@
                             <a href="{{route('subs.index')}}"><i class="fa fa-trophy fa-fw"></i> Subs</a>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-star fa-fw"></i> Portfolio<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{route('portfolio.index')}}">Portfolio List</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('portfolio.create')}}">Create Portfolio</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa  fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

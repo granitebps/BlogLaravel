@@ -10,6 +10,7 @@ use App\Models\ProfileModel;
 use App\Models\MessageModel;
 use App\Models\EmailModel;
 use Illuminate\Support\Facades\Session;
+use App\Models\PortfolioModel;
 
 class HomeController extends Controller
 {
@@ -123,5 +124,15 @@ class HomeController extends Controller
         EmailModel::subs($request);
         Session::flash('success', 'Anda Sudah Subscibe!!!');
         return redirect()->back();
+    }
+
+    // Menampilkan halaman portfolio
+    public function portfolio()
+    {
+        $data['portfolio'] = PortfolioModel::get_portfolio();
+        $data['tag'] = TagModel::get_tag();
+        $data['category'] = CategoryModel::get_category();
+        $data['random'] = PostModel::get_post_random();
+        return view('portfolio', $data);
     }
 }

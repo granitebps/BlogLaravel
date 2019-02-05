@@ -83,6 +83,7 @@
                 @endforeach
                 <li><a href="{{route('home.about')}}" title="">About</a></li>
                 <li><a href="{{route('home.contact')}}" title="">Contact</a></li>
+                <li><a href="{{route('home.portfolio')}}" title="">Portfolio</a></li>
             </ul> <!-- end header__nav -->
 
             <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

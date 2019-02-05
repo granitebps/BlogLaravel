@@ -70,6 +70,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/killed_post/{id}', 'PostController@killed')->name('post.killed');
     // Drafted Post
     Route::get('/draft_post/{id}', 'PostController@drafted')->name('post.draft');
+
+    // Portfolio
+    Route::resource('portfolio', 'PortfolioController');
 });
 
 // Tampilan User
@@ -90,3 +93,5 @@ Route::get('/contact', 'HomeController@contact')->name('home.contact');
 Route::post('/contact', 'HomeController@contact_email')->name('home.email');
 // Subscription
 Route::post('/subs', 'HomeController@subs')->name('home.subs');
+// Portfolio
+Route::get('/portfolio', 'HomeController@portfolio')->name('home.portfolio');
