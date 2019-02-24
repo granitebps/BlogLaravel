@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\EmailModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\EmailModel;
 
 class SubscriberController extends Controller
 {

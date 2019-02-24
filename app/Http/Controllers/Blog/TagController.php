@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\TagModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\TagModel;
 use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\User;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller

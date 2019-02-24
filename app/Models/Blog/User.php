@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Blog;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\ProfileModel;
-
 
 class User extends Authenticatable
 {
@@ -38,13 +36,13 @@ class User extends Authenticatable
     // Relasi One to One dengan Profile
     public function profile()
     {
-        return $this->hasOne('App\Models\ProfileModel');
+        return $this->hasOne('App\Models\Blog\ProfileModel');
     }
 
     // Relasi One To Many dengan Post
     public function posts()
     {
-        return $this->hasMany('App\Models\PostModel');
+        return $this->hasMany('App\Models\Blog\PostModel');
     }
 
     // Menampilkan semuda data user

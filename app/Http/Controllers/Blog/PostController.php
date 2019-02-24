@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\CategoryModel;
-use App\Models\TagModel;
-use Illuminate\Support\Facades\Session;
-use App\Models\PostModel;
-use App\Models\EmailModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\CategoryModel;
+use App\Models\Blog\TagModel;
+use App\Models\Blog\PostModel;
+use App\Models\Blog\EmailModel;
+use Illuminate\Blog\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller

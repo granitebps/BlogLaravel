@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\ProfileModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\ProfileModel;
 use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
@@ -73,5 +74,4 @@ class ProfileController extends Controller
 
         return redirect()->route('password');
     }
-
 }

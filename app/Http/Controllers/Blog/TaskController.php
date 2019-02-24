@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\TaskModel;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class TaskController extends Controller

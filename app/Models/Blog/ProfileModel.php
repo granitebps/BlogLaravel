@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Blog;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use App\Models\User;
+use App\Models\Blog\User;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileModel extends Model

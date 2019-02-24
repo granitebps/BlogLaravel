@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\CategoryModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\CategoryModel;
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller

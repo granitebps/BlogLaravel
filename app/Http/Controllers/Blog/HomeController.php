@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\PostModel;
-use App\Models\CategoryModel;
-use App\Models\TagModel;
-use App\Models\ProfileModel;
-use App\Models\MessageModel;
-use App\Models\EmailModel;
+use App\Models\Blog\PostModel;
+use App\Models\Blog\CategoryModel;
+use App\Models\Blog\TagModel;
+use App\Models\Blog\ProfileModel;
+use App\Models\Blog\MessageModel;
+use App\Models\Blog\EmailModel;
+use App\Models\Blog\PortfolioModel;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\Models\PortfolioModel;
 
 class HomeController extends Controller
 {

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\MessageModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\MessageModel;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 

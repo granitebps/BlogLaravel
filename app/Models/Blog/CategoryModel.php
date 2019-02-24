@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Blog;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\PostModel;
+use App\Models\Blog\PostModel;
 use Illuminate\Support\Facades\File;
 
 class CategoryModel extends Model

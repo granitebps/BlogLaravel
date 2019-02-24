@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
-use App\Models\PortfolioModel;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\PortfolioModel;
 use Illuminate\Support\Facades\Session;
 
 class PortfolioController extends Controller

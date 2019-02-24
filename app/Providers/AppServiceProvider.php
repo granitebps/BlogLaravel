@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\SettingModel;
-use App\Models\TaskModel;
+use App\Models\Blog\SettingModel;
+use App\Models\Blog\TaskModel;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
