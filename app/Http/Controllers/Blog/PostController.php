@@ -8,7 +8,7 @@ use App\Models\Blog\CategoryModel;
 use App\Models\Blog\TagModel;
 use App\Models\Blog\PostModel;
 use App\Models\Blog\EmailModel;
-use Illuminate\Blog\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
@@ -19,19 +19,19 @@ class PostController extends Controller
         $request = $request->all();
         if (!empty($request)) {
             // Search Post
-            $data['post'] = PostModel::search($request);
+            $post = PostModel::search($request);
         } else {
-            $data['post'] = PostModel::get_post();
+            $post = PostModel::get_post();
         }
-        return view('admin.post.index', $data);
+        return view('admin.post.index', compact('post'));
     }
 
     // Menampilkan halaman membuat post
     public function create()
     {
-        $data['category'] = CategoryModel::get_category();
-        $data['tag'] = TagModel::get_tag();
-        return view('admin.post.create', $data);
+        $category = CategoryModel::get_category();
+        $tag = TagModel::get_tag();
+        return view('admin.post.create', compact(['category', 'tag']));
     }
 
     // Proses membuat post
@@ -74,10 +74,10 @@ class PostController extends Controller
     // Menampilkan halaman edit post
     public function edit($id)
     {
-        $data['category'] = CategoryModel::get_category();
-        $data['tag'] = TagModel::get_tag();
-        $data['post'] = PostModel::get_post_id($id);
-        return view('admin.post.edit', $data);
+        $category = CategoryModel::get_category();
+        $tag = TagModel::get_tag();
+        $post = PostModel::get_post_id($id);
+        return view('admin.post.edit', compact(['category', 'tag', 'post']));
     }
 
     // Proses edit post
@@ -113,8 +113,8 @@ class PostController extends Controller
     // Menampilkan trashed post
     public function trashed()
     {
-        $data['post'] = PostModel::trashed_post();
-        return view('admin.post.trashed', $data);
+        $post = PostModel::trashed_post();
+        return view('admin.post.trashed', compact('post'));
     }
 
     // Proses restore post

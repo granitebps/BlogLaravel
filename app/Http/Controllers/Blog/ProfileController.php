@@ -12,8 +12,8 @@ class ProfileController extends Controller
     // Menampilkan tampilan edit profile
     public function edit()
     {
-        $data['user'] = ProfileModel::get_user_login();
-        return view('admin.profile.profile', $data);
+        $user = ProfileModel::get_user_login();
+        return view('admin.profile.profile', compact('user'));
     }
 
     // Proses update profile

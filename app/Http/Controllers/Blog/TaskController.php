@@ -37,8 +37,8 @@ class TaskController extends Controller
     // Menampilkan halaman edit task
     public function edit($id)
     {
-        $data['task_id'] = TaskModel::get_task_id($id);
-        return view('admin.task.edit', $data);
+        $task_id = TaskModel::get_task_id($id);
+        return view('admin.task.edit', compact('task_id'));
     }
 
     // Proses edit task

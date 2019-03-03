@@ -12,8 +12,8 @@ class TagController extends Controller
     // Menampilkan halaman tag
     public function index()
     {
-        $data['tag'] = TagModel::get_tag();
-        return view('admin.tag.index', $data);
+        $tag = TagModel::get_tag();
+        return view('admin.tag.index', compact('tag'));
     }
 
     // Menampilkan halaman membuat tag
@@ -37,8 +37,8 @@ class TagController extends Controller
     // Menampilkan halaman edit tag
     public function edit($id)
     {
-        $data['tag'] = TagModel::get_tag_id($id);
-        return view('admin.tag.edit', $data);
+        $tag = TagModel::get_tag_id($id);
+        return view('admin.tag.edit', compact('tag'));
     }
 
     // Proses edit tag

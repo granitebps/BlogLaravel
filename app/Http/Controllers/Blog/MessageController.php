@@ -13,15 +13,15 @@ class MessageController extends Controller
     // Menampilkan Pesan
     public function index()
     {
-        $data['message'] = MessageModel::get_message();
-        return view('admin.message.index', $data);
+        $message = MessageModel::get_message();
+        return view('admin.message.index', compact('message'));
     }
 
     // Menampilkan halaman untuk membalas pesan
     public function reply($id)
     {
-        $data['message'] = MessageModel::get_message_id($id);
-        return view('admin.message.reply', $data);
+        $message = MessageModel::get_message_id($id);
+        return view('admin.message.reply', compact('message'));
     }
 
     // Proses membalas pesan

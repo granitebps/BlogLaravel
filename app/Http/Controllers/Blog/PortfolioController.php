@@ -11,8 +11,8 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $data['portfolio'] = PortfolioModel::get_portfolio();
-        return view('admin.portfolio.index', $data);
+        $portfolio = PortfolioModel::get_portfolio();
+        return view('admin.portfolio.index', compact('portfolio'));
     }
 
     public function create()
@@ -37,8 +37,8 @@ class PortfolioController extends Controller
 
     public function edit($id)
     {
-        $data['portfolio'] = PortfolioModel::get_portfolio_id($id);
-        return view('admin.portfolio.edit', $data);
+        $portfolio = PortfolioModel::get_portfolio_id($id);
+        return view('admin.portfolio.edit', compact('portfolio'));
     }
 
     public function update(Request $request, $id)

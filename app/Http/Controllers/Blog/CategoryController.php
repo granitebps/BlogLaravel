@@ -12,8 +12,8 @@ class CategoryController extends Controller
     // Menampilkan list category
     public function index()
     {
-        $data['category'] = CategoryModel::get_category();
-        return view('admin.category.index', $data);
+        $category = CategoryModel::get_category();
+        return view('admin.category.index', compact('category'));
     }
 
     // Menampilkan halaman membuat category
@@ -38,8 +38,8 @@ class CategoryController extends Controller
     // Menampilkan halaman edit category
     public function edit($id)
     {
-        $data['category'] = CategoryModel::get_category_id($id);
-        return view('admin.category.edit', $data);
+        $category = CategoryModel::get_category_id($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     // Proses edit category

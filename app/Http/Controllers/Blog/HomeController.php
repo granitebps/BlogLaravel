@@ -24,89 +24,88 @@ class HomeController extends Controller
     // Menampilkan halaman dashboard admin
     public function index()
     {
-        $data['post'] = PostModel::get_post();
-        $data['message'] = MessageModel::get_message_unread();
-        $data['subs'] = EmailModel::get_subs();
-        return view('admin.home', $data);
+        $post = PostModel::get_post();
+        $message = MessageModel::get_message_unread();
+        $subs = EmailModel::get_subs();
+        return view('admin.home', compact(['post', 'message', 'subs']));
     }
 
     // Menampilkan halaman utama
     public function welcome()
     {
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $data['post'] = PostModel::get_post_publish();
-        $data['random'] = PostModel::get_post_random();
-        $data['featured'] = PostModel::get_post_featured();
-        return view('welcome', $data);
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $post = PostModel::get_post_publish();
+        $random = PostModel::get_post_random();
+        $featured = PostModel::get_post_featured();
+        return view('welcome', compact("tag", 'category', 'post', 'random', 'featured'));
     }
 
     // Menampilkan halaman per post
     public function show($slug)
     {
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $data['post'] = PostModel::get_post_slug($slug);
-        $data['random'] = PostModel::get_post_random();
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $post = PostModel::get_post_slug($slug);
+        $random = PostModel::get_post_random();
 
-        $post = $data['post'];
-        $next_post = PostModel::where('post_id', '>', $post->post_id)->min('post_id');
-        $data['next_post'] = PostModel::get_post_id($next_post);
-        $prev_post = PostModel::where('post_id', '<', $post->post_id)->max('post_id');
-        $data['prev_post'] = PostModel::get_post_id($prev_post);
-        return view('show', $data);
+        $next_post_temp = PostModel::where('post_id', '>', $post->post_id)->min('post_id');
+        $next_post = PostModel::get_post_id($next_post_temp);
+        $prev_post_temp = PostModel::where('post_id', '<', $post->post_id)->max('post_id');
+        $prev_post = PostModel::get_post_id($prev_post_temp);
+        return view('show', compact(['tag', 'category', 'post', 'random', 'next_post', 'prev_post']));
     }
 
     // Menampilkan halaman per category
     public function category($slug)
     {
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $category = CategoryModel::get_category_slug($slug);
-        $data['post'] = $category->post()->paginate(10);
-        $data['random'] = PostModel::get_post_random();
-        return view('category', $data)->with('category_name', $category);
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $category_name = CategoryModel::get_category_slug($slug);
+        $post = $category_name->post()->paginate(10);
+        $random = PostModel::get_post_random();
+        return view('category', compact(['tag', 'category', 'category_name', 'post', 'random']));
     }
 
     // Menampilkan halaman per tag
     public function tag($slug)
     {
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $tag = TagModel::get_tag_slug($slug);
-        $data['post'] = $tag->post()->paginate(10);
-        $data['random'] = PostModel::get_post_random();
-        return view('tag', $data)->with('tag_name', $tag);
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $tag_name = TagModel::get_tag_slug($slug);
+        $post = $tag_name->post()->paginate(10);
+        $random = PostModel::get_post_random();
+        return view('tag', compact(['tag', 'category', 'tag_name', 'post', 'random']));
     }
 
     // Menampilkan halaman hasil search
     public function search(Request $request)
     {
         $request = $request->all();
-        $data['post'] = PostModel::search($request);
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $data['random'] = PostModel::get_post_random();
-        return view('search', $data);
+        $post = PostModel::search($request);
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $random = PostModel::get_post_random();
+        return view('search', compact(['post', 'tag', 'category', 'random']));
     }
 
     // Menampilkan halaman about
     public function about()
     {
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $data['random'] = PostModel::get_post_random();
-        return view('about', $data);
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $random = PostModel::get_post_random();
+        return view('about', compact(['tag', 'category', 'random']));
     }
 
     // Menampilkan halaman contact
     public function contact()
     {
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $data['random'] = PostModel::get_post_random();
-        $data['profile'] = ProfileModel::get_profile();
-        return view('contact', $data);
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $random = PostModel::get_post_random();
+        $profile = ProfileModel::get_profile();
+        return view('contact', compact(['tag', 'category', 'random', 'profile']));
     }
 
     // Proses user mengirim pesan kepada admin
@@ -130,10 +129,10 @@ class HomeController extends Controller
     // Menampilkan halaman portfolio
     public function portfolio()
     {
-        $data['portfolio'] = PortfolioModel::get_portfolio();
-        $data['tag'] = TagModel::get_tag();
-        $data['category'] = CategoryModel::get_category();
-        $data['random'] = PostModel::get_post_random();
-        return view('portfolio', $data);
+        $portfolio = PortfolioModel::get_portfolio();
+        $tag = TagModel::get_tag();
+        $category = CategoryModel::get_category();
+        $random = PostModel::get_post_random();
+        return view('portfolio', compact(['portfolio', 'tag', 'category', 'random']));
     }
 }
