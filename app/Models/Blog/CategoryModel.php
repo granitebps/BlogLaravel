@@ -15,7 +15,7 @@ class CategoryModel extends Model
     // Relasi One To Many dengan Post
     public function post()
     {
-        return $this->hasMany('App\Models\PostModel', 'category_id', 'category_id');
+        return $this->hasMany('App\Models\Blog\PostModel', 'category_id', 'category_id');
     }
 
     // Menampilkan semua category

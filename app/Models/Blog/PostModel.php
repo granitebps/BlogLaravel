@@ -18,25 +18,25 @@ class PostModel extends Model
     // Relasi One to Many dengan Category
     public function category()
     {
-        return $this->belongsTo('App\Models\CategoryModel', 'category_id', 'category_id');
+        return $this->belongsTo('App\Models\Blog\CategoryModel', 'category_id', 'category_id');
     }
 
     // Relasi Many to Many dengan Tag (Pivot : post_tag)
     public function tags()
     {
-        return $this->belongsToMany('App\Models\TagModel', 'post_tag', 'post_id', 'tag_id');
+        return $this->belongsToMany('App\Models\Blog\TagModel', 'post_tag', 'post_id', 'tag_id');
     }
 
     // Relasi One To Many dengan User
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->belongsTo('App\Models\Blog\User', 'user_id', 'id');
     }
 
     // Relasi One To Many dengan Profile
     public function profile()
     {
-        return $this->belongsTo('App\Models\ProfileModel', 'user_id', 'user_id');
+        return $this->belongsTo('App\Models\Blog\ProfileModel', 'user_id', 'user_id');
     }
 
     // Menampilkan semua post dengan paginate atau maksimal 10 post

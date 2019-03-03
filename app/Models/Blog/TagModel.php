@@ -13,7 +13,7 @@ class TagModel extends Model
     // Relasi Many to Many dengan Post (Pivot : post_tag)
     public function post()
     {
-        return $this->belongsToMany('App\Models\PostModel', 'post_tag', 'tag_id', 'post_id');
+        return $this->belongsToMany('App\Models\Blog\PostModel', 'post_tag', 'tag_id', 'post_id');
     }
 
     // Menampilkan semua tag

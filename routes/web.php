@@ -43,7 +43,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/task/completed/{id}', 'Blog\TaskController@completed')->name('task.completed');
 
     // Category
-    Route::get('category/delete/{id}', 'Blog\CategoryController@destroy')->name('category.delete');
     Route::resource('category', 'Blog\CategoryController');
 
     // Tag

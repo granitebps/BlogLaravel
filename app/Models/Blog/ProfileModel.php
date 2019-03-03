@@ -15,7 +15,7 @@ class ProfileModel extends Model
     // Relasi One to One dengan User
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\Blog\User');
     }
 
     // Untuk mengambil data user sesuai dengan id yang sedang login

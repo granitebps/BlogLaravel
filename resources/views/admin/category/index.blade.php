@@ -27,7 +27,11 @@
                                         <a href="{{route('category.edit', ['id' => $row->category_id])}}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{route('category.delete', ['id' => $row->category_id])}}" class="btn btn-danger tombol-hapus">Delete</a>
+                                        <form id="form" action="{{ route('category.destroy', ['id'=>$row->category_id]) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger tombol-hapus">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -61,7 +65,8 @@
                 width: '600px',
             }).then((result) => {
                 if (result.value) {
-                    document.location.href = href;
+                    var form = document.getElementById('form');
+                    form.submit();
                 }
             })
         });
