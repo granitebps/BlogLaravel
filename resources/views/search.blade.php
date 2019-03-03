@@ -43,25 +43,7 @@
             </div> <!-- end entries -->
         </div> <!-- end entries-wrap -->
 
-        @if ($post->hasPages())
-            <div class="row pagination-wrap">
-                <div class="col-full">
-                    <nav class="pgn" data-aos="fade-up">
-                        <ul>    
-                            @if (!$post->onFirstPage())
-                            <li><a class="pgn__prev" href="{{$post->previousPageUrl()}}">Prev</a></li>
-                            @endif
-                            @for ($i = 1; $i <= $post->total(); $i++)
-                            <li><a class="pgn__num" href="{{$post->url($i)}}">{{$i}}</a></li>
-                            @endfor
-                            @if ($post->currentPage() != $post->lastPage())
-                            <li><a class="pgn__next" href="{{$post->nextPageUrl()}}">Next</a></li>
-                            @endif
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        @endif
+        {{$post->links()}}
 
     </section> <!-- end s-content -->
 

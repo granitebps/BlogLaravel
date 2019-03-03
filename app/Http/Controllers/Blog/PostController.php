@@ -17,9 +17,10 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $request = $request->all();
-        if (!empty($request)) {
+        if (!empty($request['search'])) {
             // Search Post
             $post = PostModel::search($request);
+            $post->appends(['search' => $request['search']]);
         } else {
             $post = PostModel::get_post();
         }

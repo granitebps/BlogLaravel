@@ -66,7 +66,7 @@
                         </tbody>
                     </table>
                     <div class="text-center">
-                        {{$post->links()}}
+                        {{$post->links('vendor.pagination.default')}}
                     </div>
                 </div>
             </div>

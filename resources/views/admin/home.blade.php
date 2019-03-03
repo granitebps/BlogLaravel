@@ -12,7 +12,7 @@
                             <i class="fa fa-edit fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">{{$post->count()}}</div>
+                            <div class="huge">{{$post->total()}}</div>
                             <div>POST</div>
                         </div>
                     </div>
