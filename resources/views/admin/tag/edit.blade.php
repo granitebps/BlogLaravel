@@ -11,7 +11,7 @@
                     @method('put')
                     <div class="form-group">
                         <label>Tag Name</label>
-                        <input type="text" name="tag_name" class="form-control" value="{{$tag->tag_name}}" required>
+                        <input type="text" name="tag_name" class="form-control" value="{{$errors->isEmpty() ? $tag->tag_name : old('tag_name')}}" required>
                     </div>
                     <button type="submit" class="btn btn-btn-success">Submit</button>
                 </form>

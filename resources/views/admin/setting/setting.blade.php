@@ -13,11 +13,11 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label>Site Name</label>
-                            <input name="site_name" type="text" value="{{$setting->site_name}}" class="form-control" required>
+                            <input name="site_name" type="text" value="{{$errors->isEmpty() ? $setting->site_name : old('site_name')}}" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Site About</label>
-                            <textarea id="article-ckeditor" name="about" cols="30" rows="10" class="form-control" required>{{$setting->about}}</textarea>
+                            <textarea id="article-ckeditor" name="about" cols="30" rows="10" class="form-control" required>{{$errors->isEmpty() ? $setting->about : old('about')}}</textarea>
                         </div>
                         <button type="submit" class="btn btn-lg btn-success">Submit</button>
                     </form>

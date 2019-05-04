@@ -16,18 +16,20 @@
                     </div>
                     <div class="form-group">
                         <label>Post Title</label>
-                        <input type="text" name="post_title" class="form-control" value="{{$post->post_title}}" required>
+                        <input type="text" name="post_title" class="form-control" value="{{$errors->isEmpty() ? $post->post_title : old('post_title')}}" required>
                     </div>
                     <div class="form-group">
                         <label>Post Content</label>
-                        <textarea name="post_content" id='article-ckeditor' cols="30" rows="10">{{$post->post_content}}</textarea>
+                        <textarea name="post_content" id='article-ckeditor' cols="30" rows="10">{{$errors->isEmpty() ? $post->post_content: old('post_content')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Category</label>
                         <select name="category_id" class="form-control">
                             @foreach ($category as $row)
                                 <option value="{{$row->category_id}}"
-                                    {{($row->category_id == $post->category->category_id) ? 'selected' : ''}}    
+                                    @if (($errors->isEmpty() && $post->category->category_id == $row->category_id) || (!$errors->isEmpty() && old('category_id') == $row->category_id))
+                                        selected
+                                    @endif
                                 >{{$row->category_name}}</option>
                             @endforeach
                         </select>
@@ -37,11 +39,19 @@
                         @foreach ($tag as $row)
                         <div class="checkbox-inline">
                             <input type="checkbox" name="tag[]" value="{{$row->tag_id}}"
-                                @foreach ($post->tags as $item)
-                                    @if ($row->tag_id == $item->tag_id)
-                                        checked
-                                    @endif
-                                @endforeach
+                                @if ($errors->isEmpty())
+                                    @foreach ($post->tags as $item)
+                                        @if ($row->tag_id == $item->tag_id)
+                                            checked
+                                        @endif
+                                    @endforeach
+                                @else
+                                    @foreach (old('tag') as $old)
+                                        @if ($row->tag_id == $old)
+                                            checked
+                                        @endif
+                                    @endforeach
+                                @endif
                             >{{$row->tag_name}}
                         </div>
                         @endforeach

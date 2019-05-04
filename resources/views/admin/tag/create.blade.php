@@ -10,7 +10,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Tag Name</label>
-                        <input type="text" name="tag_name" class="form-control" required>
+                        <input type="text" name="tag_name" class="form-control" required value="{{$errors->isEmpty() ? '' : old('tag_name')}}">
                     </div>
                     <button type="submit" class="btn btn-btn-success">Submit</button>
                 </form>

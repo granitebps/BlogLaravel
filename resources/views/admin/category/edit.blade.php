@@ -13,7 +13,7 @@
                     @method('put')
                     <div class="form-group">
                         <label for="">Category Name</label>
-                        <input type="text" name="category_name" class="form-control" value="{{$category->category_name}}" required>
+                        <input type="text" name="category_name" class="form-control" value="{{$errors->isEmpty() ? $category->category_name : old('category_name')}}" required>
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>

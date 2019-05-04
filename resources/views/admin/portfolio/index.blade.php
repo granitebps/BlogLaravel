@@ -18,24 +18,30 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($portfolio->count() > 0)
                             @foreach ($portfolio as $row)
-                                <tr>
-                                    <td width="250px"><img src="{{asset($row->portfolio_image)}}" alt="" width="240px" height="160px"></td>
-                                    <td>{{$row->portfolio_name}}</td>
-                                    <td>{!!$row->portfolio_desc!!}</td>
-                                    <td width="250px">{{$row->portfolio_url}}</td>
-                                    <td width="80px">
-                                        <a href="{{route('portfolio.edit', ['id'=>$row->portfolio_id])}}" class="btn btn-primary">Edit</a>
-                                    </td>
-                                    <td width="100px">
-                                        <form action="{{route('portfolio.destroy', ['id'=>$row->portfolio_id])}}" method="post">
-                                            {{ csrf_field() }}
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td width="250px"><img src="{{asset($row->portfolio_image)}}" alt="" width="240px" height="160px"></td>
+                                <td>{{$row->portfolio_name}}</td>
+                                <td>{!!$row->portfolio_desc!!}</td>
+                                <td width="250px">{{$row->portfolio_url}}</td>
+                                <td width="80px">
+                                    <a href="{{route('portfolio.edit', ['id'=>$row->portfolio_id])}}" class="btn btn-primary">Edit</a>
+                                </td>
+                                <td width="100px">
+                                    <form action="{{route('portfolio.destroy', ['id'=>$row->portfolio_id])}}" method="post">
+                                        {{ csrf_field() }}
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
                             @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6" class="text-center text-danger">No Portfolio Found</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

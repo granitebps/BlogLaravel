@@ -16,15 +16,15 @@
                     </div>
                     <div class="form-group">
                         <label>Portfolio Name</label>
-                        <input type="text" name="portfolio_name" class="form-control" required value="{{$portfolio->portfolio_name}}">
+                        <input type="text" name="portfolio_name" class="form-control" required value="{{$errors->isEmpty() ? $portfolio->portfolio_name : old('portfolio_name')}}">
                     </div>
                     <div class="form-group">
                         <label>Portfolio Description</label>
-                        <textarea name="portfolio_desc" id='article-ckeditor' cols="30" rows="10">{{$portfolio->portfolio_desc}}</textarea>
+                        <textarea name="portfolio_desc" id='article-ckeditor' cols="30" rows="10">{{$errors->isEmpty() ? $portfolio->portfolio_desc : old('portfolio_desc')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Portfolio Link</label>
-                        <input type="text" name="portfolio_url" class="form-control" required value="{{$portfolio->portfolio_url}}">
+                        <input type="text" name="portfolio_url" class="form-control" required value="{{$errors->isEmpty() ? $portfolio->portfolio_url : old('portfolio_url')}}">
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>

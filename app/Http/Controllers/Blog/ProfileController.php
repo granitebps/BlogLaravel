@@ -69,7 +69,7 @@ class ProfileController extends Controller
         } elseif (ProfileModel::update_password($request) == 'error_confirm') {
             Session::flash('error', 'Wrong Confirm Password');
         } else {
-            Session::flash('error', 'Wrong Old Password');
+            Session::flash('error_old', 'Wrong Old Password');
         }
 
         return redirect()->route('password');

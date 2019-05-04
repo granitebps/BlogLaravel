@@ -13,11 +13,11 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label>Task</label>
-                            <input name="task" type="text" value="" class="form-control" required>
+                            <input name="task" type="text" class="form-control" required value="{{$errors->isEmpty() ? '' : old('task')}}">
                         </div>
                         <div class="form-group">
                             <label>Deadline</label>
-                            <input type="date" name="deadline" class="form-control" required>
+                            <input type="date" name="deadline" class="form-control" required value="{{$errors->isEmpty() ? '' : old('deadline')}}">
                         </div>
                         <button type="submit" class="btn btn-lg btn-success">Submit</button>
                     </form>

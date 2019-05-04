@@ -14,11 +14,11 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Name</label>
-                        <input name="name" type="text" value="{{$user->name}}" class="form-control" required>
+                        <input name="name" type="text" value="{{$errors->isEmpty() ? $user->name : old('name')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input name="email" type="email" value="{{$user->email}}" class="form-control" required>
+                        <input name="email" type="email" value="{{$errors->isEmpty() ? $user->email : old('email')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Avatar | Max : 2 MB | Width : 100px | Height : 100px</label><br>
@@ -27,39 +27,39 @@
                     </div>
                     <div class="form-group">
                         <label>About</label>
-                        <textarea name="user_about" cols="30" rows="10" class="form-control" required>{{$user->profile->user_about}}</textarea>
+                        <textarea name="user_about" cols="30" rows="10" class="form-control" required>{{$errors->isEmpty() ? $user->profile->user_about: old('user_about')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <textarea name="address" class="form-control" cols="30" rows="10" required>{{$user->profile->address}}</textarea>
+                        <textarea name="address" class="form-control" cols="30" rows="10" required>{{$errors->isEmpty() ? $user->profile->address : old('address')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Contact Number</label>
-                        <input type="text" name="contact_number" value="{{$user->profile->contact_number}}" class="form-control" required>
+                        <input type="text" name="contact_number" value="{{$errors->isEmpty() ? $user->profile->contact_number : old('contact_number')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Contact Email</label>
-                        <input type="email" name="contact_email" value="{{$user->profile->contact_email}}" class="form-control" required>
+                        <input type="email" name="contact_email" value="{{$errors->isEmpty() ? $user->profile->contact_email : old('contact_email')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Instagram</label>
-                        <input type="text" name="instagram" value="{{$user->profile->instagram}}" class="form-control" required>
+                        <input type="text" name="instagram" value="{{$errors->isEmpty() ? $user->profile->instagram : old('instagram')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Facebook</label>
-                        <input type="text" name="facebook" value="{{$user->profile->facebook}}" class="form-control" required>
+                        <input type="text" name="facebook" value="{{$errors->isEmpty() ? $user->profile->facebook : old('facebook')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Twitter</label>
-                        <input type="text" name="twitter" value="{{$user->profile->twitter}}" class="form-control" required>
+                        <input type="text" name="twitter" value="{{$errors->isEmpty() ? $user->profile->twitter : old('twitter')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>LinkedIn</label>
-                        <input type="text" name="linkedin" value="{{$user->profile->linkedin}}" class="form-control" required>
+                        <input type="text" name="linkedin" value="{{$errors->isEmpty() ? $user->profile->linkedin : old('linkedin')}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Github</label>
-                        <input type="text" name="github" value="{{$user->profile->github}}" class="form-control" required>
+                        <input type="text" name="github" value="{{$errors->isEmpty() ? $user->profile->github : old('github')}}" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-lg btn-success">Submit</button>
                 </form>
