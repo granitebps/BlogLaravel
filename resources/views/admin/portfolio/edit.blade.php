@@ -11,7 +11,7 @@
                     @method('put')
                     <div class="form-group">
                         <label>Image</label><br>
-                        <img src="{{asset($portfolio->portfolio_image)}}" alt="" width="240px" height="160px">
+                        <img src="{{asset('storage/images/portfolio/'.$portfolio->portfolio_image)}}" alt="" width="240px" height="160px">
                         <input type="file" name="portfolio_image" class="form-control-file">
                     </div>
                     <div class="form-group">

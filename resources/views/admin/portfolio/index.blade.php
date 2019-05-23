@@ -21,7 +21,7 @@
                             @if ($portfolio->count() > 0)
                             @foreach ($portfolio as $row)
                             <tr>
-                                <td width="250px"><img src="{{asset($row->portfolio_image)}}" alt="" width="240px" height="160px"></td>
+                                <td width="250px"><img src="{{asset('storage/images/portfolio/'.$row->portfolio_image)}}" alt="" width="240px" height="160px"></td>
                                 <td>{{$row->portfolio_name}}</td>
                                 <td>{!!$row->portfolio_desc!!}</td>
                                 <td width="250px">{{$row->portfolio_url}}</td>

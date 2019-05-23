@@ -23,7 +23,7 @@
 
                                 <div class="entry__info">
                                     <a href="#" class="entry__profile-pic">
-                                        <img class="avatar" src="{{asset($row->profile->avatar)}}" alt="">
+                                        <img class="avatar" src="{{asset('storage/images/avatars/'.$row->profile->avatar)}}" alt="">
                                     </a>
                                     <ul class="entry__meta">
                                         <li><a href="#0">{{$row->user->name}}</a></li>

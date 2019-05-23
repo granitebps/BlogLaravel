@@ -120,7 +120,7 @@
                     @foreach ($random as $item)
                         <article class="col-block popular__post">
                             <a href="{{route('home.show', ['slug'=>$item->post_slug])}}" class="popular__thumb">
-                                <img src="{{asset($item->featured)}}" alt="">
+                                <img src="{{asset('storage/images/posts/'.$item->featured)}}" alt="">
                             </a>
                             <h5>{{$item->post_title}}</h5>
                             <section class="popular__meta">

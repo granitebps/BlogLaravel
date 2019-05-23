@@ -29,7 +29,9 @@
                             @foreach ($portfolio as $row)
                                 <tr>
                                     <td width="250px">
-                                        <img src="{{asset($row->portfolio_image)}}" alt="" height="160px" width="240px">
+                                        <a target="_blank" href="{{asset('storage/images/portfolio/'.$row->portfolio_image)}}">
+                                            <img src="{{asset('storage/images/portfolio/'.$row->portfolio_image)}}" alt="" height="160px" width="240px">
+                                        </a>
                                     </td>
                                     <td>{{$row->portfolio_name}}</td>
                                     <td>{!!$row->portfolio_desc!!}</td>

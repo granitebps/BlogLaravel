@@ -10,11 +10,13 @@
 
             <div class="entry__media col-full">
                 <div class="entry__post-thumb">
+                    <a target="_blank" href="{{asset('storage/images/posts/'.$post->featured)}}">
                     <img src="{{asset('storage/images/posts/'.$post->featured)}}" 
                         srcset="{{asset('storage/images/posts/'.$post->featured)}} 2000w, 
                                 {{asset('storage/images/posts/'.$post->featured)}} 1000w, 
                                 {{asset('storage/images/posts/'.$post->featured)}} 500w" 
                         sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                    </a>
                 </div>
             </div>
 
@@ -59,7 +61,7 @@
             
 
                 <div class="entry__author">
-                    <img src="{{asset($post->profile->avatar)}}" alt="">
+                    <img src="{{asset('storage/images/avatars/'.$post->profile->avatar)}}" alt="">
 
                     <div class="entry__author-about">
                         <h5 class="entry__author-name">
