@@ -56,4 +56,10 @@ throw ValidationException::withMessages([
 ]);
 ```
 
+Pada file auth.php, pada folder resources/lang/en tambahkan baris dibawah ini :
+
+```
+'deleted' => 'The User Has Been Deleted',
+```
+
 Jangan lupa untuk import model Usernya
