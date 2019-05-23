@@ -72,7 +72,7 @@ class RegisterController extends Controller
 
         ProfileModel::create([
             'user_id' => $user->id,
-            'avatar' => 'images/avatars/default.png'
+            'avatar' => 'default.png'
         ]);
 
         return $user;

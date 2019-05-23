@@ -28,7 +28,7 @@ class ProfileModel extends Model
     public static function update_avatar($avatar_name)
     {
         $user = self::get_user_login();
-        $user->profile->avatar = 'images/avatars/' . $avatar_name;
+        $user->profile->avatar = $avatar_name;
         $user->profile->save();
     }
 

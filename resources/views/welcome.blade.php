@@ -14,7 +14,7 @@
                     <div class="featured__slide">
                         <div class="entry">
 
-                            <div class="entry__background" style="background-image:url('{{$row->featured}}');"></div>
+                            <div class="entry__background" style="background-image:url('{{'storage/images/posts/'.$row->featured}}');"></div>
                             
                             <div class="entry__content">
                                 <span class="entry__category"><a href="{{route('home.category', ['slug'=>$row->category->category_slug])}}">{{$row->category->category_name}}</a></span>
@@ -55,8 +55,8 @@
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
                             <a href="{{route('home.show', ['slug'=>$row->post_slug])}}" class="item-entry__thumb-link">
-                                <img src="{{asset($row->featured)}}" 
-                                    srcset="{{asset($row->featured)}} 1x, {{asset($row->featured)}} 2x" alt="">
+                                <img src="{{asset('storage/images/posts/'.$row->featured)}}" 
+                                    srcset="{{asset('storage/images/posts/'.$row->featured)}} 1x, {{asset('storage/images/posts/'.$row->featured)}} 2x" alt="">
                             </a>
                         </div>
         

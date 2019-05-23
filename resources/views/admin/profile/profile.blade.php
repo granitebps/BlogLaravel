@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label>Avatar | Max : 2 MB | Width : 100px | Height : 100px</label><br>
-                        <img src="{{asset($user->profile->avatar)}}" width="100px" height="100px">
+                        <img src="{{asset('storage/images/avatars/'.$user->profile->avatar)}}" width="100px" height="100px">
                         <input name="avatar" type="file" class="form-control-file">
                     </div>
                     <div class="form-group">

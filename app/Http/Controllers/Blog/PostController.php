@@ -94,7 +94,7 @@ class PostController extends Controller
         if ($request->hasFile('featured')) {
             $featured = $request->featured;
             $featured_name = time() . $featured->getClientOriginalName();
-            $featured->move('images/posts', $featured_name);
+            $featured->storeAs('public/images/posts', $featured_name);
             PostModel::update_featured($featured_name, $id);
         }
         $request = $request->all();

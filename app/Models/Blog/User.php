@@ -74,8 +74,8 @@ class User extends Authenticatable
     public static function kill($id)
     {
         $user = User::onlyTrashed()->where('id', $id)->first();
-        if ($user->profile->avatar != 'images/avatars/default.png') {
-            File::delete($user->profile->avatar);
+        if ($user->profile->avatar != 'default.png') {
+            File::delete('storage/images/avatars/' . $user->profile->avatar);
         }
         $user->profile->delete();
         $user->forceDelete();

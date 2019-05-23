@@ -62,12 +62,12 @@ class PostModel extends Model
         $tag = $request['tag'];
         $user = Auth::id();
         $featured_name = time() . $featured->getClientOriginalName();
-        $featured->move('images/posts', $featured_name);
+        $featured->storeAs('public/images/posts', $featured_name);
         $post = PostModel::create([
             'post_title' => $post_title,
             'post_content' => $post_content,
             'post_slug' => $post_slug,
-            'featured' => 'images/posts/' . $featured_name,
+            'featured' => $featured_name,
             'category_id' => $category,
             'user_id' => $user,
         ]);
@@ -102,7 +102,9 @@ class PostModel extends Model
     public static function update_featured($featured_name, $id)
     {
         $post = self::get_post_id($id);
-        $post->featured = 'images/posts/' . $featured_name;
+        // Pada saat update image post, image lama akan terhapus
+        File::delete('storage/images/posts/' . $post->featured);
+        $post->featured = $featured_name;
         $post->save();
     }
 
@@ -142,7 +144,7 @@ class PostModel extends Model
     public static function killed($id)
     {
         $post = PostModel::onlyTrashed()->where('post_id', $id)->first();
-        File::delete($post->featured);
+        File::delete('storage/images/posts/' . $post->featured);
         $post->tags()->detach();
         $post->forceDelete();
     }

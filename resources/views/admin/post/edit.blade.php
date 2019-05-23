@@ -11,7 +11,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Featured Image</label><br>
-                        <img src="{{ asset($post->featured) }}" height="100px" width="100px">
+                        <img src="{{ asset('storage/images/posts/'.$post->featured) }}" style="height:auto; width:20%;">
                         <input type="file" name="featured" class="form-control-file">
                     </div>
                     <div class="form-group">

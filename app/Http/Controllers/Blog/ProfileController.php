@@ -37,7 +37,7 @@ class ProfileController extends Controller
         if ($request->hasFile('avatar')) {
             $avatar = $request->avatar;
             $avatar_name = time() . $avatar->getClientOriginalName();
-            $avatar->move('images/avatars', $avatar_name);
+            $avatar->storeAs('public/images/avatars', $avatar_name);
             ProfileModel::update_avatar($avatar_name);
         }
 

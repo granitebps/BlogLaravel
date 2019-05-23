@@ -23,12 +23,12 @@ class PortfolioModel extends Model
         $portfolio_url = $request['portfolio_url'];
         $image = $request['portfolio_image'];
         $image_name = time() . $image->getClientOriginalName();
-        $image->move('images/portfolio', $image_name);
+        $image->storeAs('public/images/portfolio', $image_name);
         PortfolioModel::create([
             'portfolio_name' => $portfolio_name,
             'portfolio_desc' => $portfolio_desc,
             'portfolio_url' => $portfolio_url,
-            'portfolio_image' => 'images/portfolio/' . $image_name,
+            'portfolio_image' => $image_name,
         ]);
     }
 
@@ -40,7 +40,11 @@ class PortfolioModel extends Model
     public static function update_image($image_name, $id)
     {
         $portfolio = self::get_portfolio_id($id);
-        $portfolio->portfolio_image = 'images/portfolio/' . $image_name;
+
+        // Hapus foto portfolio lama saat update
+        File::delete('storage/images/portfolio/' . $portfolio->portfolio_image);
+
+        $portfolio->portfolio_image = $image_name;
         $portfolio->save();
     }
 

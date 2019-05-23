@@ -24,7 +24,7 @@
                             <tbody>
                                 @foreach ($user as $row) 
                                 <tr>
-                                    <td><img src="{{asset($row->profile->avatar)}}" width="100px" height="100px"></td>
+                                    <td><img src="{{asset('storage/images/avatars/'.$row->profile->avatar)}}" width="100px" height="100px"></td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->email}}</td>
                                     <td>{{$row->created_at->toformattedDateString()}}</td>
