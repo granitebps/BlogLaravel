@@ -19,8 +19,10 @@
                             <label>Deadline</label>
                             <input type="date" name="deadline" class="form-control" required value="{{$errors->isEmpty() ? '' : old('deadline')}}">
                         </div>
-                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success btn-block">Create</button>
                     </form>
+                    <hr>
+                    <a href="{{ route('task.index') }}" class="btn btn-warning btn-block">Back</a>
                 </div>
             </div>
         </div>

@@ -24,8 +24,10 @@
                         <label for="">Message</label>
                         <textarea required name="msg" cols="30" rows="10" class="form-control"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success">Send</button>
+                    <button type="submit" class="btn btn-success btn-block">Send</button>
                 </form>
+                <hr>
+                <a href="{{ route('message.index') }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

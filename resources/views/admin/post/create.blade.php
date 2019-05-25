@@ -48,8 +48,10 @@
                         </div>
                         @endforeach
                     </div>
-                    <button type="submit" class="btn btn-success">Publish</button>
+                    <button type="submit" class="btn btn-success btn-block">Publish</button>
                 </form>
+                <hr>
+                <a href="{{ route('post.index') }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

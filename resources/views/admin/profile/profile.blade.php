@@ -61,8 +61,10 @@
                         <label>Github</label>
                         <input type="text" name="github" value="{{$errors->isEmpty() ? $user->profile->github : old('github')}}" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>
+                <hr>
+                <a href="{{ url()->previous() }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

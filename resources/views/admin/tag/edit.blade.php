@@ -13,8 +13,10 @@
                         <label>Tag Name</label>
                         <input type="text" name="tag_name" class="form-control" value="{{$errors->isEmpty() ? $tag->tag_name : old('tag_name')}}" required>
                     </div>
-                    <button type="submit" class="btn btn-btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>
+                <hr>
+                <a href="{{ route('tag.index') }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

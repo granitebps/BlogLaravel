@@ -19,8 +19,10 @@
                             <label>Site About</label>
                             <textarea id="article-ckeditor" name="about" cols="30" rows="10" class="form-control" required>{{$errors->isEmpty() ? $setting->about : old('about')}}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                        <button type="submit" class="btn btn-block btn-success">Edit</button>
                     </form>
+                    <hr>
+                    <a href="{{ url()->previous() }}" class="btn btn-warning btn-block">Back</a>
                 </div>
             </div>
         </div>

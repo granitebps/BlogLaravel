@@ -24,8 +24,10 @@
                         <label>Confirm New Password</label><br>
                         <input name="confirm_password" type="password" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>
+                <hr>
+                <a href="{{ url()->previous() }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

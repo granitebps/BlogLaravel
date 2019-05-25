@@ -24,8 +24,10 @@
                         <label>Portfolio Link</label>
                         <input type="text" name="portfolio_url" class="form-control" required value="{{$errors->isEmpty() ? '' : old('portfolio_url')}}">
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success btn-block">Create</button>
                 </form>
+                <hr>
+                <a href="{{ route('portfolio.index') }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

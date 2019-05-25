@@ -14,8 +14,10 @@
                         <label for="">Category Name</label>
                         <input type="text" name="category_name" class="form-control" required value="{{$errors->isEmpty() ? '' : old('category_name')}}">
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success btn-block">Create</button>
                 </form>
+                <hr>
+                <a href="{{ route('category.index') }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>

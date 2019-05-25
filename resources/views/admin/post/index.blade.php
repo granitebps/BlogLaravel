@@ -7,7 +7,7 @@
             <div class="panel-heading">Post List</div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Post Title</th>
@@ -23,7 +23,7 @@
                             @if ($post->count() > 0)
 
                             @foreach ($post as $row)
-                                <tr>
+                                <tr class="{{($row->publish == 1) ? '' : 'bg-info'}}">
                                     <td>{{$row->post_title}}</td>
                                     <td width="150px">{{$row->user->name}}</td>
                                     <td width="150px">{{$row->category->category_name}}</td>

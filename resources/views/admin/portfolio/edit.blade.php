@@ -28,6 +28,8 @@
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>
+                <hr>
+                <a href="{{ route('portfolio.index') }}" class="btn btn-warning btn-block">Back</a>
             </div>
         </div>
     </div>
