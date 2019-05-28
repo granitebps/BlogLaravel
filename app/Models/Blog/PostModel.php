@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 use Illuminate\Support\Facades\File;
+use App\Models\Blog\TagModel;
 
 class PostModel extends Model
 {
@@ -59,7 +60,10 @@ class PostModel extends Model
         $post_slug = str_slug($post_title);
         $featured = $request['featured'];
         $category = $request['category_id'];
-        $tag = $request['tag'];
+
+        $tag_collection = $request['tag'];
+        $tag = TagModel::create_tag($tag_collection);
+
         $user = Auth::id();
         $featured_name = time() . $featured->getClientOriginalName();
         $featured->storeAs('public/images/posts', $featured_name);
@@ -116,8 +120,11 @@ class PostModel extends Model
         $post->post_content = $request['post_content'];
         $post->post_slug = str_slug($post->post_title);
         $post->category_id = $request['category_id'];
-        $tag = $request['tag'];
+
+        $tag_collection = $request['tag'];
+        $tag = TagModel::create_tag($tag_collection);
         $post->save();
+
         $post->tags()->sync($tag);
     }
 

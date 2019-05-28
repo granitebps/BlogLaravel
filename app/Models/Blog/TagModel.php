@@ -23,14 +23,21 @@ class TagModel extends Model
     }
 
     // Proses membuat tag
-    public static function create_tag($request)
+    public static function create_tag($tag_collection)
     {
-        $tag_name = $request['tag_name'];
-        $tag_slug = str_slug($tag_name);
-        TagModel::create([
-            'tag_name' => $tag_name,
-            'tag_slug' => $tag_slug
-        ]);
+        $tag_array = explode(',', $tag_collection);
+        $i = 0;
+        foreach ($tag_array as $item) {
+            $tag_name = trim($item);
+            $tag_slug = str_slug($tag_name);
+            $tag = TagModel::firstOrCreate([
+                'tag_name' => $tag_name,
+                'tag_slug' => $tag_slug
+            ]);
+            $tag_id[$i] = $tag->tag_id;
+            $i++;
+        }
+        return $tag_id;
     }
 
     // Menampilkan tag berdasarkan id

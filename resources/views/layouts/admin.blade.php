@@ -164,16 +164,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-tags fa-fw"></i> Tag<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{route('tag.index')}}">Tag List</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('tag.create')}}">Create Tag</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="{{route('tag.index')}}"><i class="fa fa-tags fa-fw"></i> Tag</a>
                         </li>
                         <li>
                             <a href="{{route('message.index')}}"><i class="fa fa-envelope fa-fw"></i> Message</a>

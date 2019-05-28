@@ -16,22 +16,24 @@ class TagController extends Controller
         return view('admin.tag.index', compact('tag'));
     }
 
-    // Menampilkan halaman membuat tag
+    // Menampilkan halaman membuat tag | Tag dibuat otomatis saat membuat post
     public function create()
     {
-        return view('admin.tag.create');
+        abort(404);
+        // return view('admin.tag.create');
     }
 
-    // Proses membuat tag
+    // Proses membuat tag | Tag dibuat otomatis saat membuat post
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tag_name' => 'required'
-        ]);
-        $request = $request->all();
-        TagModel::create_tag($request);
-        Session::flash('success', 'Tag Created');
-        return redirect()->route('tag.index');
+        abort(404);
+        // $this->validate($request, [
+        //     'tag_name' => 'required'
+        // ]);
+        // $request = $request->all();
+        // TagModel::create_tag($request);
+        // Session::flash('success', 'Tag Created');
+        // return redirect()->route('tag.index');
     }
 
     // Menampilkan halaman edit tag

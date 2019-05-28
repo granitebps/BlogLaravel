@@ -31,8 +31,7 @@ class PostController extends Controller
     public function create()
     {
         $category = CategoryModel::get_category();
-        $tag = TagModel::get_tag();
-        return view('admin.post.create', compact(['category', 'tag']));
+        return view('admin.post.create', compact(['category']));
     }
 
     // Proses membuat post
@@ -76,8 +75,18 @@ class PostController extends Controller
     public function edit($id)
     {
         $category = CategoryModel::get_category();
-        $tag = TagModel::get_tag();
+
         $post = PostModel::get_post_id($id);
+        $tag_collection = $post->tags()->get();
+
+        $i = 0;
+        foreach ($tag_collection as $item) {
+            $tag_name[$i] = $item->tag_name;
+            $i++;
+        }
+
+        $tag = implode(",", $tag_name);
+
         return view('admin.post.edit', compact(['category', 'tag', 'post']));
     }
 

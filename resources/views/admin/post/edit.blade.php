@@ -36,25 +36,10 @@
                     </div>
                     <div class="form-group">
                         <label>Tag</label>
-                        @foreach ($tag as $row)
-                        <div class="checkbox-inline">
-                            <input type="checkbox" name="tag[]" value="{{$row->tag_id}}"
-                                @if ($errors->isEmpty())
-                                    @foreach ($post->tags as $item)
-                                        @if ($row->tag_id == $item->tag_id)
-                                            checked
-                                        @endif
-                                    @endforeach
-                                @else
-                                    @foreach (old('tag') as $old)
-                                        @if ($row->tag_id == $old)
-                                            checked
-                                        @endif
-                                    @endforeach
-                                @endif
-                            >{{$row->tag_name}}
-                        </div>
-                        @endforeach
+                        <input type="text" name="tag" class="form-control" value="{{$errors->isEmpty() ? $tag : old('tag')}}">
+                        <small class="form-text">
+                            Pisahkan tag dengan koma (,)
+                        </small>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>

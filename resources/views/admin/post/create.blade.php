@@ -34,19 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label>Tag</label>
-                        @foreach ($tag as $row)
-                        <div class="checkbox-inline">
-                            <input type="checkbox" name="tag[]" value="{{$row->tag_id}}"
-                            @if (!$errors->isEmpty())
-                                @foreach (old('tag') as $item)
-                                    @if ($row->tag_id == $item)
-                                        checked
-                                    @endif
-                                @endforeach
-                            @endif
-                            >{{$row->tag_name}}
-                        </div>
-                        @endforeach
+                        <input type="text" name="tag" class="form-control" value="{{$errors->isEmpty() ? '' : old('tag')}}">
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Publish</button>
                 </form>
