@@ -23,7 +23,8 @@ class PortfolioModel extends Model
         $portfolio_url = $request['portfolio_url'];
         $image = $request['portfolio_image'];
         $image_name = time() . $image->getClientOriginalName();
-        $image->storeAs('public/images/portfolio', $image_name);
+        // $image->storeAs('public/images/portfolio', $image_name);
+        $image->move('storage/images/portfolio', $image_name);
         PortfolioModel::create([
             'portfolio_name' => $portfolio_name,
             'portfolio_desc' => $portfolio_desc,

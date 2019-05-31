@@ -52,7 +52,8 @@ class PortfolioController extends Controller
         if ($request->hasFile('portfolio_image')) {
             $image = $request->portfolio_image;
             $image_name = time() . $image->getClientOriginalName();
-            $image->storeAs('public/images/portfolio', $image_name);
+            $image->move('storage/images/portfolio', $image_name);
+            // $image->storeAs('public/images/portfolio', $image_name);
             PortfolioModel::update_image($image_name, $id);
         }
         $request = $request->all();
