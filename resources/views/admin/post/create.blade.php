@@ -9,12 +9,12 @@
                 <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Featured Image</label>
+                        <label>Featured Image | Maks : 2MB</label>
                         <input type="file" name="featured" class="form-control-file">
                     </div>
                     <div class="form-group">
                         <label>Post Title</label>
-                        <input type="text" name="post_title" class="form-control" required value="{{$errors->isEmpty() ? '' : old('post_title')}}">
+                        <input type="text" name="post_title" class="form-control" placeholder="Post Title..." required value="{{$errors->isEmpty() ? '' : old('post_title')}}">
                     </div>
                     <div class="form-group">
                         <label>Post Content</label>
@@ -34,7 +34,10 @@
                     </div>
                     <div class="form-group">
                         <label>Tag</label>
-                        <input type="text" name="tag" class="form-control" value="{{$errors->isEmpty() ? '' : old('tag')}}">
+                        <input type="text" name="tag" class="form-control" placeholder="Tag..." value="{{$errors->isEmpty() ? '' : old('tag')}}">
+                        <small class="form-text">
+                            Pisahkan tag dengan koma (,)
+                        </small>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Publish</button>
                 </form>

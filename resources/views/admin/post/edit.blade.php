@@ -10,13 +10,13 @@
                     @method('put')
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Featured Image</label><br>
+                        <label>Featured Image | Maks : 2MB</label><br>
                         <img src="{{ asset('storage/images/posts/'.$post->featured) }}" style="height:auto; width:20%;">
                         <input type="file" name="featured" class="form-control-file">
                     </div>
                     <div class="form-group">
                         <label>Post Title</label>
-                        <input type="text" name="post_title" class="form-control" value="{{$errors->isEmpty() ? $post->post_title : old('post_title')}}" required>
+                        <input type="text" name="post_title" class="form-control" placeholder="Post Title..." value="{{$errors->isEmpty() ? $post->post_title : old('post_title')}}" required>
                     </div>
                     <div class="form-group">
                         <label>Post Content</label>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label>Tag</label>
-                        <input type="text" name="tag" class="form-control" value="{{$errors->isEmpty() ? $tag : old('tag')}}">
+                        <input type="text" name="tag" class="form-control" placeholder="Tag..." value="{{$errors->isEmpty() ? $tag : old('tag')}}">
                         <small class="form-text">
                             Pisahkan tag dengan koma (,)
                         </small>

@@ -15,6 +15,7 @@
                                 <tr>
                                     <th>Subs Email</th>
                                     <th>Created At</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,6 +25,9 @@
                                 <tr>
                                     <td>{{$row->email}}</td>
                                     <td>{{$row->created_at->toFormattedDateString()}}</td>
+                                    <td>
+                                        <a href="{{ route('subs.destroy', ['id'=>$row->email_id]) }}" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @else

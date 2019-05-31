@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     // Subscriber
     Route::get('/subscriber', 'Blog\SubscriberController@index')->name('subs.index');
+    // Hapus Subscriber
+    Route::get('/subscriber/{id}', 'Blog\SubscriberController@destroy')->name('subs.destroy');
 
     // Post
     Route::resource('post', 'Blog\PostController');

@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="">Message</label>
-                        <textarea required name="msg" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea required name="msg" placeholder="Reply Message..." cols="30" rows="10" class="form-control"></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Send</button>
                 </form>

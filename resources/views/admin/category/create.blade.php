@@ -12,7 +12,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Category Name</label>
-                        <input type="text" name="category_name" class="form-control" required value="{{$errors->isEmpty() ? '' : old('category_name')}}">
+                        <input type="text" name="category_name" class="form-control" placeholder="Category Name..." required value="{{$errors->isEmpty() ? '' : old('category_name')}}">
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Create</button>
                 </form>
