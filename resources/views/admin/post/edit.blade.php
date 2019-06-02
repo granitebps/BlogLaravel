@@ -40,6 +40,13 @@
                         <small class="form-text">
                             Pisahkan tag dengan koma (,)
                         </small>
+                        <br>
+                        <small class="form-text">
+                            Tag : 
+                            @foreach ($tag_all as $item)
+                                {{$item->tag_name}},
+                            @endforeach
+                        </small>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>

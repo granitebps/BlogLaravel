@@ -30,8 +30,9 @@ class PostController extends Controller
     // Menampilkan halaman membuat post
     public function create()
     {
+        $tag = TagModel::get_tag();
         $category = CategoryModel::get_category();
-        return view('admin.post.create', compact(['category']));
+        return view('admin.post.create', compact(['category', 'tag']));
     }
 
     // Proses membuat post
@@ -87,7 +88,9 @@ class PostController extends Controller
 
         $tag = implode(",", $tag_name);
 
-        return view('admin.post.edit', compact(['category', 'tag', 'post']));
+        $tag_all = TagModel::get_tag();
+
+        return view('admin.post.edit', compact(['category', 'tag', 'post', 'tag_all']));
     }
 
     // Proses edit post
