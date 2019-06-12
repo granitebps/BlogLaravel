@@ -71,4 +71,11 @@ class TagModel extends Model
         $tag->post()->detach();
         $tag->delete();
     }
+
+    // Mengambil tag random sebanyak 8 
+    public static function get_random_tag()
+    {
+        $tag = self::inRandomOrder()->limit(8)->get();
+        return $tag;
+    }
 }

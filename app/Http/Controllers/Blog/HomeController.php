@@ -33,7 +33,7 @@ class HomeController extends Controller
     // Menampilkan halaman utama
     public function welcome()
     {
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $post = PostModel::get_post_publish();
         $random = PostModel::get_post_random();
@@ -44,7 +44,7 @@ class HomeController extends Controller
     // Menampilkan halaman per post
     public function show($slug)
     {
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $post = PostModel::get_post_slug($slug);
         $random = PostModel::get_post_random();
@@ -59,7 +59,7 @@ class HomeController extends Controller
     // Menampilkan halaman per category
     public function category($slug)
     {
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $category_name = CategoryModel::get_category_slug($slug);
         $post = $category_name->post()->paginate(10);
@@ -70,7 +70,7 @@ class HomeController extends Controller
     // Menampilkan halaman per tag
     public function tag($slug)
     {
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $tag_name = TagModel::get_tag_slug($slug);
         $post = $tag_name->post()->paginate(10);
@@ -83,7 +83,7 @@ class HomeController extends Controller
     {
         $request = $request->all();
         $post = PostModel::search($request);
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $random = PostModel::get_post_random();
         return view('search', compact(['post', 'tag', 'category', 'random']));
@@ -92,7 +92,7 @@ class HomeController extends Controller
     // Menampilkan halaman about
     public function about()
     {
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $random = PostModel::get_post_random();
         return view('about', compact(['tag', 'category', 'random']));
@@ -101,7 +101,7 @@ class HomeController extends Controller
     // Menampilkan halaman contact
     public function contact()
     {
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $random = PostModel::get_post_random();
         $profile = ProfileModel::get_profile();
@@ -130,7 +130,7 @@ class HomeController extends Controller
     public function portfolio()
     {
         $portfolio = PortfolioModel::get_portfolio();
-        $tag = TagModel::get_tag();
+        $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $random = PostModel::get_post_random();
         return view('portfolio', compact(['portfolio', 'tag', 'category', 'random']));

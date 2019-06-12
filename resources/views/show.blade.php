@@ -12,10 +12,7 @@
                 <div class="entry__post-thumb">
                     <a target="_blank" href="{{asset('storage/images/posts/'.$post->featured)}}">
                     <img src="{{asset('storage/images/posts/'.$post->featured)}}" 
-                        srcset="{{asset('storage/images/posts/'.$post->featured)}} 2000w, 
-                                {{asset('storage/images/posts/'.$post->featured)}} 1000w, 
-                                {{asset('storage/images/posts/'.$post->featured)}} 500w" 
-                        sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                        style="display:block; margin-left: auto; margin-right: auto;" alt="">
                     </a>
                 </div>
             </div>
