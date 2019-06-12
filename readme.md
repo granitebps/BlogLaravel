@@ -30,6 +30,9 @@ Ada juga beberapa fitur yang ditambahkan pada project blog ini, antara lain :
 Untuk menggunakannya silahkan clone atau fork repository ini, lalu jalankan perintah dibawah pada terminal kalian :
 
 ```
+composer install
+cp .env.example .env
+php artisan key:generate
 php artisan migrate
 php artisan db:seed
 ```
@@ -40,7 +43,7 @@ Lalu jalankan perintah dibawah untuk mengakses file images posts, portfolio dan 
 php artisan storage:link
 ```
 
-Lalu pada file AuthenticatesUsers.php pada fungsi sendFailedLoginResponse() ganti seluruh isi fungsi menjadi dibawah ini :
+Lalu pada folder vendor/laravel/framework/src/illuminate/Foundation/Auth pada file AuthenticatesUsers.php pada fungsi sendFailedLoginResponse() ganti seluruh isi fungsi menjadi dibawah ini :
 
 ```
 $user = User::withTrashed()->where('email', $request->email)->first();
@@ -54,12 +57,6 @@ if (!empty($user)) {
 throw ValidationException::withMessages([
     $this->username() => [trans('auth.failed')],
 ]);
-```
-
-Pada file auth.php, pada folder resources/lang/en tambahkan baris dibawah ini :
-
-```
-'deleted' => 'The User Has Been Deleted',
 ```
 
 Jangan lupa untuk import model Usernya
