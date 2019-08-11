@@ -26,7 +26,8 @@ class PortfolioController extends Controller
             'portfolio_name' => 'required',
             'portfolio_desc' => 'required',
             'portfolio_url' => 'required',
-            'portfolio_image' => 'required|image|max:2048'
+            'portfolio_image' => 'required',
+            'portfolio_image.*' => 'image|max:2048',
         ]);
         $request = $request->all();
         PortfolioModel::create_portfolio($request);
@@ -67,5 +68,32 @@ class PortfolioController extends Controller
         PortfolioModel::delete_portfolio($id);
         Session::flash('error', 'Portfolio Deleted');
         return redirect()->route('portfolio.index');
+    }
+
+    public function preview(Request $request)
+    {
+        // <a target="_blank" href="{{asset('storage/images/portfolio/'.$folder.'/'.$item)}}"><img src="{{asset('storage/images/portfolio/'.$folder.'/'.$item)}}" alt=""></a>
+        $portfolio = PortfolioModel::get_portfolio_id($request->id);
+        $image = explode(',', $portfolio->portfolio_image);
+        $folder = str_replace(' ', '_', strtolower($portfolio->portfolio_name));
+        $output = '
+        <div id="tes-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+        ';
+
+        foreach ($image as $index => $file) {
+            $path = asset('storage/images/portfolio/' . $folder . '/' . $file);
+            $output .= '
+                <div class="item active">
+                    <a target="_blank" href="' . $path . '"><img src="' . $path . '" alt=""></a><br>
+                </div>
+            ';
+        }
+
+        $output .= '
+        </div>
+        </div>
+        ';
+        echo $output;
     }
 }
