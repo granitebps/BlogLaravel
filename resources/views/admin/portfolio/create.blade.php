@@ -9,8 +9,8 @@
                 <form action="{{route('portfolio.store')}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Image</label>
-                        <input type="file" name="portfolio_image" class="form-control-file">
+                        <label>Image | You can select multiple file</label>
+                        <input type="file" name="portfolio_image[]" class="form-control-file" multiple>
                     </div>
                     <div class="form-group">
                         <label>Portfolio Name</label>

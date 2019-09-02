@@ -32,6 +32,12 @@
     ================================================== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+    {{-- Custom CSS --}}
+    @yield('style')
+
     {{-- Google Analytics
     ================================================== --}}
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -168,7 +174,7 @@
                 
                 <div class="col-six tab-full s-footer__about">
                         
-                    <h4>About {{$setting->site_name}}</h4>
+                    <h4>About {{\App\Models\Blog\SettingModel::get_setting()->site_name}}</h4>
 
                     <div class="col-twelve">
                         <ul class="footer-social">
@@ -237,7 +243,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     </footer> <!-- end s-footer -->
 
-
     <!-- Java Script
     ================================================== -->
     <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
@@ -249,7 +254,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     {{-- Toastr --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    {{-- Toastr --}}
+
     <script>
         @if($errors->count() > 0)
             @foreach($errors->all() as $error)
@@ -263,6 +268,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             toastr.error("{{Session::get('error')}}")
         @endif
     </script>
+
+    {{-- Custom JS --}}
+    @yield('script')
 
 </body>
 

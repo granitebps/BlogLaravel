@@ -98,5 +98,6 @@ Route::post('/contact', 'Blog\HomeController@contact_email')->name('home.email')
 Route::post('/subs', 'Blog\HomeController@subs')->name('home.subs');
 // Portfolio
 Route::get('/portfolio', 'Blog\HomeController@portfolio')->name('home.portfolio');
+Route::get('/preview', 'Blog\PortfolioController@preview');
 
 // ============================================ PORTFOLIO ============================================

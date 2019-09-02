@@ -66,7 +66,8 @@ class PostModel extends Model
 
         $user = Auth::id();
         $featured_name = time() . $featured->getClientOriginalName();
-        $featured->storeAs('public/images/posts', $featured_name);
+        $featured->move('storage/images/posts', $featured_name);
+        // $featured->storeAs('public/images/posts', $featured_name);
         $post = PostModel::create([
             'post_title' => $post_title,
             'post_content' => $post_content,

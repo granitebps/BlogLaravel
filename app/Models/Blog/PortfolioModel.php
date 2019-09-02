@@ -22,13 +22,24 @@ class PortfolioModel extends Model
         $portfolio_desc = $request['portfolio_desc'];
         $portfolio_url = $request['portfolio_url'];
         $image = $request['portfolio_image'];
-        $image_name = time() . $image->getClientOriginalName();
-        $image->storeAs('public/images/portfolio', $image_name);
+        $path_name = str_replace(' ', '_', strtolower($portfolio_name));
+        $path = public_path() . '/storage/images/portfolio/' . $path_name;
+        if (File::exists($path)) {
+            File::makeDirectory($path, $mode = 0777, true, true);
+        }
+        $image_array = [];
+        foreach ($image as $file) {
+            $image_name = time() . $file->getClientOriginalName();
+            // $image->storeAs('public/images/portfolio', $image_name);
+            $file->move('storage/images/portfolio/' . $path_name, $image_name);
+            array_push($image_array, $image_name);
+        }
+        $image_db = implode(',', $image_array);
         PortfolioModel::create([
             'portfolio_name' => $portfolio_name,
             'portfolio_desc' => $portfolio_desc,
             'portfolio_url' => $portfolio_url,
-            'portfolio_image' => $image_name,
+            'portfolio_image' => $image_db,
         ]);
     }
 

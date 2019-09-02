@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('style')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
     <div class="row">
         <h1 class="page-heading">Post</h1>
@@ -46,6 +50,13 @@
                             @endforeach
                         </small>
                     </div>
+                    {{-- <div class="form-group">
+                        <select class="form-control" multiple="multiple" id="js-example-tags">
+                            <option selected="selected">orange</option>
+                            <option>white</option>
+                            <option selected="selected">purple</option>
+                        </select>
+                    </div> --}}
                     <button type="submit" class="btn btn-success btn-block">Publish</button>
                 </form>
                 <hr>
@@ -56,6 +67,7 @@
 @endsection
 
 @section('script')
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script> --}}
     <script>
         var options = {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -64,5 +76,10 @@
             extraPlugins: 'codesnippet,iframe',
         };
         CKEDITOR.replace( 'article-ckeditor', options);
+        // $(document).ready(function() {
+        //     $("#js-example-tags").select2({
+        //         tags: true
+        //     });
+        // });
     </script>
 @endsection

@@ -19,10 +19,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
-        $data['setting'] = SettingModel::get_setting();
-        $data['task'] = TaskModel::get_task();
-        View::share($data);
     }
 
     /**

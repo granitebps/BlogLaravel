@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{$setting->site_name}}</title>
+    <title>{{\App\Models\Blog\SettingModel::get_setting()->site_name}}</title>
 
     {{-- Toastr --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
@@ -19,10 +19,10 @@
 
     <!-- MetisMenu CSS -->
     <link href="{{asset('admin/vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
-
+    
     <!-- Custom CSS -->
     <link href="{{asset('admin/dist/css/sb-admin-2.css')}}" rel="stylesheet">
-
+    
     <!-- Custom Fonts -->
     <link href="{{asset('admin/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -32,6 +32,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    @yield('style')
 
 </head>
 
@@ -48,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">{{$setting->site_name}}</a>
+                <a class="navbar-brand" href="/">{{\App\Models\Blog\SettingModel::get_setting()->site_name}}</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -60,6 +62,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
                         <li>
+                            @php
+                                $task = \App\Models\Blog\TaskModel::get_task()
+                            @endphp
                             @foreach ($task as $row)
                                 <a href="#">
                                 <div class="row">

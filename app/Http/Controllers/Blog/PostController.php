@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog\CategoryModel;
-use App\Models\Blog\TagModel;
 use App\Models\Blog\PostModel;
-use App\Models\Blog\EmailModel;
+// use App\Models\Blog\EmailModel;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -48,25 +47,25 @@ class PostController extends Controller
         $request = $request->all();
         PostModel::create_post($request);
 
-        // Kirim Email Setelah membuat post
-        $data = array(
-            'post' => $request['post_title'],
-            'slug' => str_slug($request['post_title']),
-            'email' => EmailModel::all()
-        );
+        // // Kirim Email Setelah membuat post
+        // $data = array(
+        //     'post' => $request['post_title'],
+        //     'slug' => str_slug($request['post_title']),
+        //     'email' => EmailModel::all()
+        // );
 
-        foreach ($data['email'] as $item) {
-            Mail::send('email', $data, function ($mail) use ($data, $item) {
-                $mail->to($item->email, 'GBPS')
-                    ->subject('New Post');
-                $mail->from('granitebagas28@gmail.com', 'Website MyMind');
-            });
-        }
+        // foreach ($data['email'] as $item) {
+        //     Mail::send('email', $data, function ($mail) use ($data, $item) {
+        //         $mail->to($item->email, 'GBPS')
+        //             ->subject('New Post');
+        //         $mail->from('granitebagas28@gmail.com', 'Website MyMind');
+        //     });
+        // }
 
-        if (Mail::failures()) {
-            Session::flash('error', 'Email Gagal Dikirim');
-        }
-        Session::flash('success', 'Email Berhasil Dikirim');
+        // if (Mail::failures()) {
+        //     Session::flash('error', 'Email Gagal Dikirim');
+        // }
+        // Session::flash('success', 'Email Berhasil Dikirim');
 
         Session::flash('success', 'Post Created');
         return redirect()->route('post.index');
@@ -106,7 +105,8 @@ class PostController extends Controller
         if ($request->hasFile('featured')) {
             $featured = $request->featured;
             $featured_name = time() . $featured->getClientOriginalName();
-            $featured->storeAs('public/images/posts', $featured_name);
+            $featured->move('storage/images/posts', $featured_name);
+            // $featured->storeAs('public/images/posts', $featured_name);
             PostModel::update_featured($featured_name, $id);
         }
         $request = $request->all();
