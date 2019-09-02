@@ -36,17 +36,17 @@
                     </div>
                     <div class="form-group">
                         <label>Tag</label>
-                        <input type="text" name="tag" class="form-control" placeholder="Tag..." value="{{$errors->isEmpty() ? $tag : old('tag')}}">
-                        <small class="form-text">
-                            Pisahkan tag dengan koma (,)
-                        </small>
-                        <br>
-                        <small class="form-text">
-                            Tag : 
+                        <select class="form-control" multiple="multiple" id="tag" name="tag[]">
                             @foreach ($tag_all as $item)
-                                {{$item->tag_name}},
+                                <option
+                                @foreach ($post->tags as $row)
+                                    @if ($row->tag_id == $item->tag_id)
+                                        selected="selected"
+                                    @endif
+                                @endforeach
+                                value="{{$item->tag_id}}">{{$item->tag_name}}</option>
                             @endforeach
-                        </small>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Edit</button>
                 </form>
@@ -66,5 +66,12 @@
             extraPlugins: 'codesnippet,iframe',
         };
         CKEDITOR.replace( 'article-ckeditor', options);
+
+        $(document).ready(function() {
+            $("#tag").select2({
+                tags: true,
+                tokenSeparators: [',', ' ']
+            });
+        });
     </script>
 @endsection

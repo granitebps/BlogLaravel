@@ -26,6 +26,9 @@
     <!-- Custom Fonts -->
     <link href="{{asset('admin/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
+    {{-- Select2 --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -266,6 +269,9 @@
 
     {{-- CKEditor --}}
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+
+    {{-- Select2 --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 
     {{-- Toastr --}}
     <script>

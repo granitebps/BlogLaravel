@@ -25,17 +25,13 @@ class TagModel extends Model
     // Proses membuat tag
     public static function create_tag($tag_collection)
     {
-        $tag_array = explode(',', $tag_collection);
-        $i = 0;
-        foreach ($tag_array as $item) {
-            $tag_name = trim($item);
-            $tag_slug = str_slug($tag_name);
+        foreach ($tag_collection as $index => $item) {
+            $tag_slug = str_slug($item);
             $tag = TagModel::firstOrCreate([
-                'tag_name' => $tag_name,
+                'tag_name' => $item,
                 'tag_slug' => $tag_slug
             ]);
-            $tag_id[$i] = $tag->tag_id;
-            $i++;
+            $tag_id[$index] = $tag->tag_id;
         }
         return $tag_id;
     }

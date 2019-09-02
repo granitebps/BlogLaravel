@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog\CategoryModel;
 use App\Models\Blog\PostModel;
+use App\Models\Blog\TagModel;
 // use App\Models\Blog\EmailModel;
 use Illuminate\Support\Facades\Session;
 // use Illuminate\Support\Facades\Mail;
@@ -77,19 +78,10 @@ class PostController extends Controller
         $category = CategoryModel::get_category();
 
         $post = PostModel::get_post_id($id);
-        $tag_collection = $post->tags()->get();
-
-        $i = 0;
-        foreach ($tag_collection as $item) {
-            $tag_name[$i] = $item->tag_name;
-            $i++;
-        }
-
-        $tag = implode(",", $tag_name);
 
         $tag_all = TagModel::get_tag();
 
-        return view('admin.post.edit', compact(['category', 'tag', 'post', 'tag_all']));
+        return view('admin.post.edit', compact(['category', 'post', 'tag_all']));
     }
 
     // Proses edit post

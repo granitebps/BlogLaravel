@@ -38,25 +38,12 @@
                     </div>
                     <div class="form-group">
                         <label>Tag</label>
-                        <input type="text" name="tag" class="form-control" placeholder="Tag..." value="{{$errors->isEmpty() ? '' : old('tag')}}">
-                        <small class="form-text">
-                            Pisahkan tag dengan koma (,)
-                        </small>
-                        <br>
-                        <small class="form-text">
-                            Tag : 
+                        <select class="form-control" multiple="multiple" id="tag" name="tag[]">
                             @foreach ($tag as $item)
-                                {{$item->tag_name}},
+                                <option value="{{$item->tag_id}}">{{$item->tag_name}}</option>
                             @endforeach
-                        </small>
-                    </div>
-                    {{-- <div class="form-group">
-                        <select class="form-control" multiple="multiple" id="js-example-tags">
-                            <option selected="selected">orange</option>
-                            <option>white</option>
-                            <option selected="selected">purple</option>
                         </select>
-                    </div> --}}
+                    </div>
                     <button type="submit" class="btn btn-success btn-block">Publish</button>
                 </form>
                 <hr>
@@ -76,10 +63,12 @@
             extraPlugins: 'codesnippet,iframe',
         };
         CKEDITOR.replace( 'article-ckeditor', options);
-        // $(document).ready(function() {
-        //     $("#js-example-tags").select2({
-        //         tags: true
-        //     });
-        // });
+
+        $(document).ready(function() {
+            $("#tag").select2({
+                tags: true,
+                tokenSeparators: [',', ' ']
+            });
+        });
     </script>
 @endsection
