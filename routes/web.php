@@ -25,9 +25,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     // User
     Route::get('/user', 'Blog\UserController@index')->name('user');
-    Route::get('/user/{id}', 'Blog\UserController@destroy')->name('user.delete');
     // Trashed User
-    Route::get('/trashed_user', 'Blog\UserController@trashed')->name('user.trashed');
+    Route::get('/user/trashed_user', 'Blog\UserController@trashed')->name('user.trashed');
+    Route::get('/user/{id}', 'Blog\UserController@destroy')->name('user.delete');
     Route::get('/restore_user/{id}', 'Blog\UserController@restore')->name('user.restore');
     Route::get('/kill_user/{id}', 'Blog\UserController@kill')->name('user.kill');
 
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/profile', 'Blog\ProfileController@edit')->name('profile');
     Route::post('/profile', 'Blog\ProfileController@update')->name('profile.update');
     // Change Password
-    Route::get('/change-password', 'Blog\ProfileController@edit_password')->name('password');
+    Route::get('/profile/change-password', 'Blog\ProfileController@edit_password')->name('password');
     Route::post('/change-password', 'Blog\ProfileController@update_password')->name('password.update');
 
     // Task
@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Message
     Route::get('/message', 'Blog\MessageController@index')->name('message.index');
     // Reply Message
-    Route::get('/reply/{id}', 'Blog\MessageController@reply')->name('message.reply');
+    Route::get('/message/reply/{id}', 'Blog\MessageController@reply')->name('message.reply');
     Route::post('/reply/{id}', 'Blog\MessageController@replied')->name('message.replied');
     // Delete Message
     Route::get('/delete/{id}', 'Blog\MessageController@delete')->name('message.delete');
@@ -63,19 +63,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Hapus Subscriber
     Route::get('/subscriber/{id}', 'Blog\SubscriberController@destroy')->name('subs.destroy');
 
-    // Post
-    Route::resource('post', 'Blog\PostController');
     // Trashed Post
-    Route::get('/trashed_post', 'Blog\PostController@trashed')->name('post.trashed');
+    Route::get('/post/trashed_post', 'Blog\PostController@trashed')->name('post.trashed');
     // Restored Post
     Route::get('/restored_post/{id}', 'Blog\PostController@restored')->name('post.restored');
     // Deleted Post Permanently
     Route::get('/killed_post/{id}', 'Blog\PostController@killed')->name('post.killed');
     // Drafted Post
     Route::get('/draft_post/{id}', 'Blog\PostController@drafted')->name('post.draft');
+    // Post
+    Route::resource('post', 'Blog\PostController');
 
     // Portfolio
-    Route::resource('portfolio', 'Blog\PortfolioController');
+    Route::resource('portfolio', 'Portfolio\PortfolioController');
 });
 
 // Tampilan User
@@ -98,6 +98,6 @@ Route::post('/contact', 'Blog\HomeController@contact_email')->name('home.email')
 Route::post('/subs', 'Blog\HomeController@subs')->name('home.subs');
 // Portfolio
 Route::get('/portfolio', 'Blog\HomeController@portfolio')->name('home.portfolio');
-Route::get('/preview', 'Blog\PortfolioController@preview');
+Route::get('/preview', 'Portfolio\PortfolioController@preview');
 
 // ============================================ PORTFOLIO ============================================

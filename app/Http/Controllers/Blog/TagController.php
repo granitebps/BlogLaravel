@@ -12,8 +12,9 @@ class TagController extends Controller
     // Menampilkan halaman tag
     public function index()
     {
-        $tag = TagModel::get_tag();
-        return view('admin.tag.index', compact('tag'));
+        $data['title'] = 'Tag List';
+        $data['tag'] = TagModel::get_tag();
+        return view('admin.tag.index')->with($data);
     }
 
     // Menampilkan halaman membuat tag | Tag dibuat otomatis saat membuat post
@@ -39,8 +40,9 @@ class TagController extends Controller
     // Menampilkan halaman edit tag
     public function edit($id)
     {
-        $tag = TagModel::get_tag_id($id);
-        return view('admin.tag.edit', compact('tag'));
+        $data['title'] = 'Edit Tag';
+        $data['tag'] = TagModel::get_tag_id($id);
+        return view('admin.tag.edit')->with($data);
     }
 
     // Proses edit tag

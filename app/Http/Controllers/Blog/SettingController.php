@@ -12,7 +12,9 @@ class SettingController extends Controller
     // Menampilkan tampilan setting
     public function edit()
     {
-        return view('admin.setting.setting');
+        $data['title'] = 'Edit Setting';
+        $data['setting'] = SettingModel::get_setting();
+        return view('admin.setting.setting')->with($data);
     }
 
     // Proses Update Setting

@@ -12,8 +12,9 @@ class UserController extends Controller
     // Menampilkan halaman user
     public function index()
     {
-        $user = User::get_user();
-        return view('admin.user.user', compact('user'));
+        $data['title'] = 'Users List';
+        $data['user'] = User::get_user();
+        return view('admin.user.user')->with($data);
     }
 
     // Menghapus user / memindahkan user ke trash
@@ -27,8 +28,9 @@ class UserController extends Controller
     // Menampilkan user yang di trashed
     public function trashed()
     {
-        $user = User::get_trashed();
-        return view('admin.user.trashed', compact('user'));
+        $data['title'] = 'Trashed User';
+        $data['user'] = User::get_trashed();
+        return view('admin.user.trashed')->with($data);
     }
 
     // Memulihkan user

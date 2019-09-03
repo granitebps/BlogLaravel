@@ -12,8 +12,9 @@ class SubscriberController extends Controller
     // Menampilkan Subscriber
     public function index()
     {
-        $subs = EmailModel::get_subs();
-        return view('admin.subs.index', compact('subs'));
+        $data['title'] = 'Subscriber List';
+        $data['subs'] = EmailModel::get_subs();
+        return view('admin.subs.index')->with($data);
     }
 
     // Menghapus subscriber

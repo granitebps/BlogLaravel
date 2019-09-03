@@ -12,7 +12,6 @@ use App\Models\Blog\EmailModel;
 use App\Models\Blog\PortfolioModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\Models\Blog\TaskModel;
 
 class HomeController extends Controller
 {
@@ -25,11 +24,12 @@ class HomeController extends Controller
     // Menampilkan halaman dashboard admin
     public function index()
     {
-        $post = PostModel::get_post();
-        $message = MessageModel::get_message_unread();
-        $subs = EmailModel::get_subs();
-        $task = TaskModel::get_task();
-        return view('admin.home', compact(['post', 'message', 'subs', 'task']));
+        $data['post'] = PostModel::get_post();
+        $data['message'] = MessageModel::get_message_unread();
+        $data['subs'] = EmailModel::get_subs();
+        $data['portfolio'] = PortfolioModel::get_portfolio();
+        $data['title'] = 'Dashboard';
+        return view('admin.home')->with($data);
     }
 
     // Menampilkan halaman utama

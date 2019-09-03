@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="page-header">Task</h1>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    Task List
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{$title}}</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <form action="{{route('task.store')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -27,4 +27,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

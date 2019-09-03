@@ -12,13 +12,16 @@ class TaskController extends Controller
     // Menampilkan task
     public function index()
     {
-        return view('admin.task.index');
+        $data['task'] = TaskModel::get_task();
+        $data['title'] = 'Task List';
+        return view('admin.task.index')->with($data);
     }
 
     // Menampilkan halaman membuat task
     public function create()
     {
-        return view('admin.task.create');
+        $data['title'] = 'Create Task';
+        return view('admin.task.create')->with($data);
     }
 
     // Proses membuat task
@@ -38,8 +41,9 @@ class TaskController extends Controller
     // Menampilkan halaman edit task
     public function edit($id)
     {
-        $task_id = TaskModel::get_task_id($id);
-        return view('admin.task.edit', compact('task_id'));
+        $data['title'] = 'Edit Task';
+        $data['task_id'] = TaskModel::get_task_id($id);
+        return view('admin.task.edit')->with($data);
     }
 
     // Proses edit task

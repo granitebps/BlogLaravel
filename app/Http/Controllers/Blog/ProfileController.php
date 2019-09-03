@@ -12,8 +12,9 @@ class ProfileController extends Controller
     // Menampilkan tampilan edit profile
     public function edit()
     {
-        $user = ProfileModel::get_user_login();
-        return view('admin.profile.profile', compact('user'));
+        $data['title'] = 'Edit Profile';
+        $data['user'] = ProfileModel::get_user_login();
+        return view('admin.profile.profile')->with($data);
     }
 
     // Proses update profile
@@ -52,7 +53,8 @@ class ProfileController extends Controller
     // Menampilkan halaman edit password
     public function edit_password()
     {
-        return view('admin.profile.change_password');
+        $data['title'] = 'Change Password';
+        return view('admin.profile.change_password')->with($data);
     }
 
     // Proses ganti password
