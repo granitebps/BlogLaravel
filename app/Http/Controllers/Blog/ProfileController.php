@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Blog\ProfileModel;
-use Illuminate\Support\Facades\Session;
+use App\Models\Blog\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -13,7 +14,7 @@ class ProfileController extends Controller
     public function edit()
     {
         $data['title'] = 'Edit Profile';
-        $data['user'] = ProfileModel::get_user_login();
+        $data['user'] = User::first();
         return view('admin.profile.profile')->with($data);
     }
 
@@ -21,32 +22,43 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'avatar' => 'image',
+            'name' => 'required|string|max:191',
+            'username' => 'required|string|max:191',
+            'email' => 'required|email',
+            'avatar' => 'image|max:2048',
             'address' => 'required',
             'user_about' => 'required',
-            'contact_number' => 'required',
-            'contact_email' => 'required|email|max:2048',
-            'instagram' => 'required|url',
-            'facebook' => 'required|url',
-            'twitter' => 'required|url',
-            'linkedin' => 'required|url',
-            'avatar' => 'image|max:2048'
+            'contact_number' => 'required|string|max:191',
+            'instagram' => 'required|url|max:191',
+            'facebook' => 'required|url|max:191',
+            'twitter' => 'required|url|max:191',
+            'linkedin' => 'required|url|max:191',
         ]);
 
+        $user = User::first();
         if ($request->hasFile('avatar')) {
             $avatar = $request->avatar;
             $avatar_name = time() . $avatar->getClientOriginalName();
-            $avatar->move('storage/images/avatars', $avatar_name);
-            // $avatar->storeAs('public/images/avatars', $avatar_name);
-            ProfileModel::update_avatar($avatar_name);
+            Storage::putFileAs('public/images/avatar', $avatar, $avatar_name);
+            $user->profile->avatar = $avatar_name;
+            $user->profile->save();
         }
 
-        $request = $request->all();
-        ProfileModel::update_user($request);
-        Session::flash('success', 'Profile Updated');
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->profile->address = $request->address;
+        $user->profile->user_about = $request->user_about;
+        $user->profile->contact_number = $request->contact_number;
+        $user->profile->instagram = $request->instagram;
+        $user->profile->facebook = $request->facebook;
+        $user->profile->twitter = $request->twitter;
+        $user->profile->linkedin = $request->linkedin;
+        $user->profile->github = $request->github;
+        $user->save();
+        $user->profile->save();
 
+        notify()->success('Profile Updated');
         return redirect()->route('profile');
     }
 
@@ -62,17 +74,16 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'old_password' => 'required',
-            'new_password' => 'required|min:6',
-            'confirm_password' => 'required|min:6'
+            'password' => 'required|string|min:8'
         ]);
 
-        $request = $request->all();
-        if (ProfileModel::update_password($request) == 'success') {
-            Session::flash('success', 'Password Changed');
-        } elseif (ProfileModel::update_password($request) == 'error_confirm') {
-            Session::flash('error', 'Wrong Confirm Password');
+        $user = User::first();
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            notify()->success('Password Changed');
         } else {
-            Session::flash('error_old', 'Wrong Old Password');
+            notify()->error('Wrong Old Password');
         }
 
         return redirect()->route('password');

@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 
+@section('style')
+    {{-- Select2 --}}
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -24,16 +29,11 @@
                             <textarea name="post_content" id='article-ckeditor' cols="30" rows="10">{{$errors->isEmpty() ? '' : old('post_content')}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label>Category</label>
-                            <select name="category_id" class="form-control">
-                                <option value="" disabled selected>-- Pilih Kategori --</option>
-                                @foreach ($category as $row)
-                                <option value="{{$row->category_id}}"
-                                    @if (!$errors->isEmpty() && $row->category_id == old('category_id'))
-                                    selected
-                                    @endif    
-                                    >{{$row->category_name}}
-                                </option>
+                            <label for="category">Category</label>
+                            <select name="category" id="category" class="form-control">
+                                <option value="" disabled selected>-- Select Category --</option>
+                                @foreach ($category as $item)
+                                    <option value="{{$item->category_id}}">{{$item->category_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -41,7 +41,7 @@
                             <label>Tag</label>
                             <select id="tag" name="tag[]" class="form-control" multiple="multiple">
                                 @foreach ($tag as $item)
-                                <option value="{{$item->tag_id}}">{{$item->tag_name}}</option>
+                                <option value="{{$item->tag_name}}">{{$item->tag_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,6 +57,7 @@
 @endsection
 
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 <script>
     var options = {
         filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -66,6 +67,7 @@
     };
     CKEDITOR.replace( 'article-ckeditor', options);
     
+    // Select2
     $(document).ready(function() {
         $('#tag').select2({
             tags: true,

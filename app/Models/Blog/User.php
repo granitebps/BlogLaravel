@@ -44,40 +44,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Blog\PostModel');
     }
-
-    // Menampilkan semuda data user
-    public static function get_user()
-    {
-        return User::all();
-    }
-
-    // Menghapus user / memindahkan user ke trash
-    public static function delete_user($id)
-    {
-        $user = User::find($id);
-        $user->delete();
-    }
-
-    // / Menampilkan user hanya yang di trashed
-    public static function get_trashed()
-    {
-        return User::onlyTrashed()->get();
-    }
-
-    // Memulihkan user
-    public static function restore($id)
-    {
-        return User::onlyTrashed()->where('id', $id)->restore();
-    }
-
-    // Menghapus user permanen
-    public static function kill($id)
-    {
-        $user = User::onlyTrashed()->where('id', $id)->first();
-        if ($user->profile->avatar != 'default.png') {
-            File::delete('storage/images/avatars/' . $user->profile->avatar);
-        }
-        $user->profile->delete();
-        $user->forceDelete();
-    }
 }

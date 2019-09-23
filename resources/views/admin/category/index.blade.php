@@ -55,7 +55,7 @@
         const href = $(this).attr('href');
         Swal({
             title: 'Apakah Anda Yakin Ingin Menghapus Category Ini Secara Permanent?',
-            text: 'Menghapus Category Akan Menghapus Juga Post Yang Berada Di Category Ini',
+            text: 'Menghapus Category Akan Menghapus Juga Portfolio Yang Berada Di Category Ini',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

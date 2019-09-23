@@ -11,6 +11,7 @@ use App\Models\Blog\MessageModel;
 use App\Models\Blog\EmailModel;
 use App\Models\Blog\PortfolioModel;
 use App\Http\Controllers\Controller;
+use App\Models\Blog\User;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -24,10 +25,9 @@ class HomeController extends Controller
     // Menampilkan halaman dashboard admin
     public function index()
     {
-        $data['post'] = PostModel::get_post();
-        $data['message'] = MessageModel::get_message_unread();
-        $data['subs'] = EmailModel::get_subs();
-        $data['portfolio'] = PortfolioModel::get_portfolio();
+        $data['post'] = PostModel::orderBy('post_title', 'desc')->get();
+        $data['message'] = MessageModel::where('readed', 0)->get();
+        $data['subs'] = EmailModel::all();
         $data['title'] = 'Dashboard';
         return view('admin.home')->with($data);
     }
@@ -106,7 +106,7 @@ class HomeController extends Controller
         $tag = TagModel::get_random_tag();
         $category = CategoryModel::get_category();
         $random = PostModel::get_post_random();
-        $profile = ProfileModel::get_profile();
+        $profile = User::first();
         return view('contact', compact(['tag', 'category', 'random', 'profile']));
     }
 
@@ -122,8 +122,9 @@ class HomeController extends Controller
     // Proses user untuk subcribe
     public function subs(Request $request)
     {
-        $request = $request->all();
-        EmailModel::subs($request);
+        EmailModel::create([
+            'email' => $request->subs
+        ]);
         Session::flash('success', 'Anda Sudah Subscibe!!!');
         return redirect()->back();
     }

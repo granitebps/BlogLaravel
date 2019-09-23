@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>{{\App\Models\Blog\SettingModel::get_setting()->site_name}}</title>
+	<title>{{\App\Models\Blog\User::first()->name}} | {{$title}}</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,8 +20,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	{{-- Toastr --}}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
-	{{-- Select2 --}}
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+	{{-- Notify --}}
+	@notify_css
+	@yield('style')
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
@@ -81,10 +82,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 	
 	{{-- CKEditor --}}
-	<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-	
-	{{-- Select2 --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+	<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>	
 	
 	{{-- Toastr --}}
 	<script>
@@ -104,4 +102,6 @@
 	{{-- CKEditor --}}
 	@yield('script')
 </body>
+@notify_js
+@notify_render
 </html>

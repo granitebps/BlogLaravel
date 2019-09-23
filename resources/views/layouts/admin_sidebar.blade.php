@@ -3,7 +3,7 @@
 	<a href="/" class="brand-link">
 		<img src="{{asset('admin/images/logo.png')}}" class="brand-image img-circle elevation-3"
 		style="opacity: .8">
-		<span class="brand-text font-weight-light">{{\App\Models\Blog\SettingModel::get_setting()->site_name}}</span>
+		<span class="brand-text font-weight-light">{{\App\Models\Blog\User::first()->name}}</span>
 	</a>
 	
 	<!-- Sidebar -->
@@ -28,29 +28,6 @@
 							Dashboard
 						</p>
 					</a>
-				</li>
-				<li class="nav-item has-treeview {{request()->is('admin/portfolio*') ? 'menu-open' : ''}}">
-					<a href="#" class="nav-link {{request()->is('admin/portfolio*') ? 'active' : ''}}">
-						<i class="nav-icon fa fa-star fa-fw"></i>
-						<p>
-							Portfolio
-							<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="{{route('portfolio.index')}}" class="nav-link {{request()->route()->getName() == 'portfolio.index' ? 'active' : ''}}">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Portfolio List</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{route('portfolio.create')}}" class="nav-link {{request()->route()->getName() == 'portfolio.create' ? 'active' : ''}}">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Create Portfolio</p>
-							</a>
-						</li>
-					</ul>
 				</li>
 				<li class="nav-item has-treeview {{request()->is('admin/post*') ? 'menu-open' : ''}}">
 					<a href="#" class="nav-link {{request()->is('admin/post*') ? 'active' : ''}}">
@@ -128,29 +105,6 @@
 						</p>
 					</a>
 				</li>
-				<li class="nav-item has-treeview {{request()->is('admin/user*') ? 'menu-open' : ''}}">
-					<a href="#" class="nav-link {{request()->is('admin/user*') ? 'active' : ''}}">
-						<i class="nav-icon fa fa-users fa-fw"></i>
-						<p>
-							Users
-							<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="{{route('user')}}" class="nav-link {{request()->route()->getName() == 'user' ? 'active' : ''}}">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Users List</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{route('user.trashed')}}" class="nav-link {{request()->route()->getName() == 'user.trashed' ? 'active' : ''}}">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Trashed Users</p>
-							</a>
-						</li>
-					</ul>
-				</li>
 				<li class="nav-item has-treeview {{request()->is('admin/profile*') ? 'menu-open' : ''}}">
 					<a href="#" class="nav-link {{request()->is('admin/profile*') ? 'active' : ''}}">
 						<i class="nav-icon fa fa-user fa-fw"></i>
@@ -183,16 +137,8 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{route('setting')}}" class="nav-link {{request()->route()->getName() == 'setting' ? 'active' : ''}}">
-						<i class="nav-icon fa fa-cogs fa-fw"></i>
-						<p>
-							Setting
-						</p>
-					</a>
-				</li>
-				<li class="nav-item">
 					<a href="{{route('home')}}" class="nav-link" data-toggle="modal" data-target="#logoutModal">
-							<i class="nav-icon fas fa-sign-out-alt"></i>
+						<i class="nav-icon fas fa-sign-out-alt"></i>
 						<p>
 							Logout
 						</p>

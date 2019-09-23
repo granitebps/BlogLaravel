@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use App\Models\Blog\TaskModel;
 
 class TaskController extends Controller
@@ -12,7 +11,7 @@ class TaskController extends Controller
     // Menampilkan task
     public function index()
     {
-        $data['task'] = TaskModel::get_task();
+        $data['task'] = TaskModel::orderBy('created_at', 'desc')->get();
         $data['title'] = 'Task List';
         return view('admin.task.index')->with($data);
     }
@@ -28,13 +27,16 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'task' => 'required',
-            'deadline' => 'required'
+            'task' => 'required|string|max:191',
+            'deadline' => 'required|date'
         ]);
 
-        $request = $request->all();
-        TaskModel::create_task($request);
-        Session::flash('success', 'Task Created');
+        TaskModel::create([
+            'task' => $request->task,
+            'deadline' => $request->deadline
+        ]);
+
+        notify()->success('Task Created');
         return redirect()->route('task.index');
     }
 
@@ -42,7 +44,7 @@ class TaskController extends Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Task';
-        $data['task_id'] = TaskModel::get_task_id($id);
+        $data['task_id'] = TaskModel::findOrFail($id);
         return view('admin.task.edit')->with($data);
     }
 
@@ -50,29 +52,39 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'task' => 'required',
-            'deadline' => 'required'
+            'task' => 'required|string|max:191',
+            'deadline' => 'required|date'
         ]);
 
-        $request = $request->all();
-        TaskModel::update_task($request, $id);
-        Session::flash('success', 'Task Updated');
+        $task = TaskModel::findOrFail($id);
+        $task->update([
+            'task' => $request->task,
+            'deadline' => $request->deadline
+        ]);
+
+        notify()->success('Task Updated');
         return redirect()->route('task.index');
     }
 
     // Menghapus task
     public function destroy($id)
     {
-        TaskModel::delete_task($id);
-        Session::flash('error', 'Task Deleted');
+        $task = TaskModel::findOrFail($id);
+        $task->delete();
+
+        notify()->success('Task Deleted');
         return redirect()->route('task.index');
     }
 
     // Membuat task menjadi completed
     public function completed($id)
     {
-        TaskModel::completed($id);
-        Session::flash('success', 'Task Completed');
+        $task = TaskModel::findOrFail($id);
+        $task->update([
+            'completed' => 1
+        ]);
+
+        notify()->success('Task Completed');
         return redirect()->route('task.index');
     }
 }

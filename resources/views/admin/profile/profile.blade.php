@@ -17,29 +17,29 @@
                             <input name="name" type="text" value="{{$errors->isEmpty() ? $user->name : old('name')}}" class="form-control" required>
                         </div>
                         <div class="form-group">
+                            <label>Username</label>
+                            <input name="username" type="text" value="{{$errors->isEmpty() ? $user->username : old('username')}}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
                             <label>Email</label>
                             <input name="email" type="email" value="{{$errors->isEmpty() ? $user->email : old('email')}}" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Avatar | Max : 2 MB | Width : 100px | Height : 100px</label><br>
-                            <img src="{{asset('storage/images/avatars/'.$user->profile->avatar)}}" width="100px" height="100px">
+                            <img src="{{asset('storage/images/avatars/'.$user->profile->avatar)}}" width="100px" height="100px" class="img-fluid img-thumbnail">
                             <input name="avatar" type="file" class="form-control-file">
                         </div>
                         <div class="form-group">
                             <label>About</label>
-                            <textarea name="user_about" cols="30" rows="10" class="form-control" required>{{$errors->isEmpty() ? $user->profile->user_about: old('user_about')}}</textarea>
+                            <textarea name="user_about" cols="30" rows="3" class="form-control" required>{{$errors->isEmpty() ? $user->profile->user_about: old('user_about')}}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Address</label>
-                            <textarea name="address" class="form-control" cols="30" rows="10" required>{{$errors->isEmpty() ? $user->profile->address : old('address')}}</textarea>
+                            <textarea name="address" class="form-control" cols="30" rows="3" required>{{$errors->isEmpty() ? $user->profile->address : old('address')}}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Contact Number</label>
-                            <input type="text" name="contact_number" value="{{$errors->isEmpty() ? $user->profile->contact_number : old('contact_number')}}" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Contact Email</label>
-                            <input type="email" name="contact_email" value="{{$errors->isEmpty() ? $user->profile->contact_email : old('contact_email')}}" class="form-control" required>
+                            <input type="number" name="contact_number" value="{{$errors->isEmpty() ? $user->profile->contact_number : old('contact_number')}}" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Instagram</label>

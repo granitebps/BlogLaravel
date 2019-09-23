@@ -32,7 +32,7 @@
 			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 				<span class="dropdown-item dropdown-header">{{\App\Models\Blog\TaskModel::count()}} Tasks</span>
 
-				@foreach (\App\Models\Blog\TaskModel::get_task() as $row)
+				@foreach (\App\Models\Blog\TaskModel::all() as $row)
 				<div class="dropdown-divider"></div>
 				<a href="#" class="dropdown-item">
 					<i class="fas fa-file mr-2"></i> {{$row->task}}

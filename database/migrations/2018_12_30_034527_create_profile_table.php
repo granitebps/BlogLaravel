@@ -19,7 +19,6 @@ class CreateProfileTable extends Migration
             $table->string('avatar')->nullable();
             $table->text('user_about')->nullable();
             $table->text('address')->nullable();
-            $table->string('contact_email')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('instagram')->default('https://www.instagram.com');
             $table->string('facebook')->default('https://www.facebook.com');

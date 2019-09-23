@@ -24,9 +24,6 @@ class CreatePostTable extends Migration
             $table->boolean('publish')->default(1);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('category_id')->references('category_id')->on('category');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

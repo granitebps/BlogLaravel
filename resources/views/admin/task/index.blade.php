@@ -6,10 +6,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{$title}}</h3>
+                    <h3 class="card-title float-left">{{$title}}</h3>
+                    <a href="{{route('task.create')}}" class="btn btn-secondary btn-sm float-right">Create Task</a>
                 </div>
                 <div class="card-body table-resposive">
-                    <a href="{{route('task.create')}}" class="btn btn-lg btn-secondary">Create Task</a>
                     <table class="table table-hover">
                         <thead>
                             <tr>

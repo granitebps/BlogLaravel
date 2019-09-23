@@ -19,18 +19,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Dashboard Admin
     Route::get('/home', 'Blog\HomeController@index')->name('home');
 
-    // Setting
-    Route::get('/setting', 'Blog\SettingController@edit')->name('setting');
-    Route::post('/setting', 'Blog\SettingController@update')->name('setting.update');
-
-    // User
-    Route::get('/user', 'Blog\UserController@index')->name('user');
-    // Trashed User
-    Route::get('/user/trashed_user', 'Blog\UserController@trashed')->name('user.trashed');
-    Route::get('/user/{id}', 'Blog\UserController@destroy')->name('user.delete');
-    Route::get('/restore_user/{id}', 'Blog\UserController@restore')->name('user.restore');
-    Route::get('/kill_user/{id}', 'Blog\UserController@kill')->name('user.kill');
-
     // Profile
     Route::get('/profile', 'Blog\ProfileController@edit')->name('profile');
     Route::post('/profile', 'Blog\ProfileController@update')->name('profile.update');
@@ -76,6 +64,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     // Portfolio
     Route::resource('portfolio', 'Portfolio\PortfolioController');
+
+    // Skill
+    Route::resource('skill', 'Portfolio\SkillController');
 });
 
 // Tampilan User

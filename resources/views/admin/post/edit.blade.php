@@ -26,19 +26,6 @@
                             <textarea name="post_content" id='article-ckeditor' cols="30" rows="10">{{$errors->isEmpty() ? $post->post_content: old('post_content')}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label>Category</label>
-                            <select name="category_id" class="form-control">
-                                @foreach ($category as $row)
-                                <option value="{{$row->category_id}}"
-                                    @if (($errors->isEmpty() && $post->category->category_id == $row->category_id) || (!$errors->isEmpty() && old('category_id') == $row->category_id))
-                                    selected
-                                    @endif
-                                    >{{$row->category_name}}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>Tag</label>
                             <select id="tag" name="tag[]" class="form-control" multiple="multiple">
                                 @foreach ($tag_all as $item)
@@ -48,7 +35,7 @@
                                 selected="selected"
                                 @endif
                                 @endforeach
-                                value="{{$item->tag_id}}">{{$item->tag_name}}</option>
+                                value="{{$item->tag_name}}">{{$item->tag_name}}</option>
                                 @endforeach
                             </select>
                         </div>
