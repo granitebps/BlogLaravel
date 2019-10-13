@@ -175,13 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // CKEditor
-        Unisharp\Ckeditor\ServiceProvider::class,
-
-        // FIle Manager
-        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-
     ],
 
     /*
@@ -230,8 +223,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // File Manager
-        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

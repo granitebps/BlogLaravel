@@ -11,7 +11,7 @@
 |
  */
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 // ============================================ BLOG ============================================
 
@@ -23,24 +23,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/setting', 'Blog\SettingController@edit')->name('setting');
     Route::post('/setting', 'Blog\SettingController@update')->name('setting.update');
 
-    // User
-    Route::get('/user', 'Blog\UserController@index')->name('user');
-    Route::get('/user/{id}', 'Blog\UserController@destroy')->name('user.delete');
-    // Trashed User
-    Route::get('/trashed_user', 'Blog\UserController@trashed')->name('user.trashed');
-    Route::get('/restore_user/{id}', 'Blog\UserController@restore')->name('user.restore');
-    Route::get('/kill_user/{id}', 'Blog\UserController@kill')->name('user.kill');
-
     // Profile
     Route::get('/profile', 'Blog\ProfileController@edit')->name('profile');
     Route::post('/profile', 'Blog\ProfileController@update')->name('profile.update');
     // Change Password
     Route::get('/change-password', 'Blog\ProfileController@edit_password')->name('password');
     Route::post('/change-password', 'Blog\ProfileController@update_password')->name('password.update');
-
-    // Task
-    Route::resource('task', 'Blog\TaskController');
-    Route::get('/task/completed/{id}', 'Blog\TaskController@completed')->name('task.completed');
 
     // Category
     Route::resource('category', 'Blog\CategoryController');
@@ -73,9 +61,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/killed_post/{id}', 'Blog\PostController@killed')->name('post.killed');
     // Drafted Post
     Route::get('/draft_post/{id}', 'Blog\PostController@drafted')->name('post.draft');
-
-    // Portfolio
-    Route::resource('portfolio', 'Blog\PortfolioController');
 });
 
 // Tampilan User
@@ -98,6 +83,3 @@ Route::post('/contact', 'Blog\HomeController@contact_email')->name('home.email')
 Route::post('/subs', 'Blog\HomeController@subs')->name('home.subs');
 // Portfolio
 Route::get('/portfolio', 'Blog\HomeController@portfolio')->name('home.portfolio');
-Route::get('/preview', 'Blog\PortfolioController@preview');
-
-// ============================================ PORTFOLIO ============================================

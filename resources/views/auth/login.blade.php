@@ -35,7 +35,6 @@
                 </div>
                 <!-- Change this to a button or input when using this as a form -->
                 <button class="btn btn-lg btn-success btn-block">Login</button><br>
-                <a class="text-center" href="{{route('register')}}">I Dont Have An Account</a><br>
                 <a class="text-center" href="{{route('home.welcome')}}">Go To Web</a>
             </fieldset>
         </form>

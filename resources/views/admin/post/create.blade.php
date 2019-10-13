@@ -22,11 +22,12 @@
                     </div>
                     <div class="form-group">
                         <label>Post Content</label>
-                        <textarea name="post_content" id='article-ckeditor' cols="30" rows="10">{{$errors->isEmpty() ? '' : old('post_content')}}</textarea>
+                        <textarea name="post_content" cols="30" rows="10">{{$errors->isEmpty() ? '' : old('post_content')}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Category</label>
                         <select name="category_id" class="form-control">
+                            <option value="" selected disabled>-- Select Category --</option>
                             @foreach ($category as $row)
                                 <option value="{{$row->category_id}}"
                                     @if (!$errors->isEmpty() && $row->category_id == old('category_id'))
@@ -55,14 +56,9 @@
 
 @section('script')
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script> --}}
+    <script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
     <script>
-        var options = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-            height: '700px',
-            extraPlugins: 'codesnippet,iframe',
-        };
-        CKEDITOR.replace( 'article-ckeditor', options);
+        CKEDITOR.replace('post_content', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
 
         $(document).ready(function() {
             $("#tag").select2({
