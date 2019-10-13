@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/profile', 'Blog\ProfileController@edit')->name('profile');
     Route::post('/profile', 'Blog\ProfileController@update')->name('profile.update');
     // Change Password
-    Route::get('/change-password', 'Blog\ProfileController@edit_password')->name('password');
+    Route::get('/profile/change-password', 'Blog\ProfileController@edit_password')->name('password');
     Route::post('/change-password', 'Blog\ProfileController@update_password')->name('password.update');
 
     // Category
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Message
     Route::get('/message', 'Blog\MessageController@index')->name('message.index');
     // Reply Message
-    Route::get('/reply/{id}', 'Blog\MessageController@reply')->name('message.reply');
+    Route::get('/message/reply/{id}', 'Blog\MessageController@reply')->name('message.reply');
     Route::post('/reply/{id}', 'Blog\MessageController@replied')->name('message.replied');
     // Delete Message
     Route::get('/delete/{id}', 'Blog\MessageController@delete')->name('message.delete');
@@ -51,10 +51,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Hapus Subscriber
     Route::get('/subscriber/{id}', 'Blog\SubscriberController@destroy')->name('subs.destroy');
 
-    // Post
-    Route::resource('post', 'Blog\PostController');
     // Trashed Post
-    Route::get('/trashed_post', 'Blog\PostController@trashed')->name('post.trashed');
+    Route::get('/post/trashed_post', 'Blog\PostController@trashed')->name('post.trashed');
     // Restored Post
     Route::get('/restored_post/{id}', 'Blog\PostController@restored')->name('post.restored');
     // Deleted Post Permanently

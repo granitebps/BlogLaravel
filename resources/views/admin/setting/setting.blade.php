@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="page-header">Setting</h1>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    Edit Site Setting
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{$title}}</h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <form action="{{route('setting.update')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -27,16 +27,17 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('script')
-    <script>
-        var options = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-            height: '700px',
-            extraPlugins: 'codesnippet,iframe',
-        };
-        CKEDITOR.replace( 'article-ckeditor', options);
-    </script>
+<script>
+    var options = {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        height: '700px',
+        extraPlugins: 'codesnippet,iframe',
+    };
+    CKEDITOR.replace( 'article-ckeditor', options);
+</script>
 @endsection

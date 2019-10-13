@@ -2,12 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Blog\SettingModel;
-use App\Models\Blog\TaskModel;
-
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {

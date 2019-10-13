@@ -16,12 +16,6 @@ class PostModel extends Model
     protected $guarded = ['created_at', 'updated_at'];
     protected $dates = ['deleted_at'];
 
-    // Relasi One to Many dengan Category
-    public function category()
-    {
-        return $this->belongsTo('App\Models\Blog\CategoryModel', 'category_id', 'category_id');
-    }
-
     // Relasi Many to Many dengan Tag (Pivot : post_tag)
     public function tags()
     {
@@ -40,12 +34,6 @@ class PostModel extends Model
         return $this->belongsTo('App\Models\Blog\ProfileModel', 'user_id', 'user_id');
     }
 
-    // Menampilkan semua post dengan paginate atau maksimal 10 post
-    public static function get_post()
-    {
-        return PostModel::orderBy('created_at', 'desc')->paginate(10);
-    }
-
     // Menampilkan semua post yang di publish dengan paginate atau maksimal 10 post
     public static function get_post_publish()
     {
@@ -59,7 +47,6 @@ class PostModel extends Model
         $post_content = $request['post_content'];
         $post_slug = str_slug($post_title);
         $featured = $request['featured'];
-        $category = $request['category_id'];
 
         $tag_collection = $request['tag'];
         $tag = TagModel::create_tag($tag_collection);
@@ -73,7 +60,6 @@ class PostModel extends Model
             'post_content' => $post_content,
             'post_slug' => $post_slug,
             'featured' => $featured_name,
-            'category_id' => $category,
             'user_id' => $user,
         ]);
         $post->tags()->attach($tag);
@@ -120,7 +106,6 @@ class PostModel extends Model
         $post->post_title = $request['post_title'];
         $post->post_content = $request['post_content'];
         $post->post_slug = str_slug($post->post_title);
-        $post->category_id = $request['category_id'];
 
         $tag_collection = $request['tag'];
         $tag = TagModel::create_tag($tag_collection);

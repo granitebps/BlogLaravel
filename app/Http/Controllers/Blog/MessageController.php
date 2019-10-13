@@ -13,21 +13,23 @@ class MessageController extends Controller
     // Menampilkan Pesan
     public function index()
     {
-        $message = MessageModel::get_message();
-        return view('admin.message.index', compact('message'));
+        $data['title'] = 'Message UnRead';
+        $data['message'] = MessageModel::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.message.index')->with($data);
     }
 
     // Menampilkan halaman untuk membalas pesan
     public function reply($id)
     {
-        $message = MessageModel::get_message_id($id);
-        return view('admin.message.reply', compact('message'));
+        $data['title'] = 'Reply Message';
+        $data['message'] = MessageModel::findOrFail($id);
+        return view('admin.message.reply')->with($data);
     }
 
     // Proses membalas pesan
     public function replied(Request $request, $id)
     {
-        $pesan = MessageModel::get_message_id($id);
+        $pesan = MessageModel::findOrFail($id);
         $data = array(
             'msg' => $request->msg,
             'email' => $pesan->msg_email,
@@ -51,11 +53,20 @@ class MessageController extends Controller
     // Membuat pesan Terbaca atau Belum Terbaca
     public function readed($id)
     {
-        // Default post yang terbaca -> readed == 1
-        if (MessageModel::readed($id)) {
-            Session::flash('success', 'Message Mark As Readed');
+        // Default pesan yang belum terbaca -> readed == 0
+        $msg = MessageModel::findOrFail($id);
+        if ($msg->readed == 0) {
+            $msg->readed = 1;
+            $msg->save();
+
+            notify()->success('Message Mark As Readed');
+            // Pesan menjadi Terbaca/Readed
         } else {
-            Session::flash('success', 'Message Mark As UnRead');
+            $msg->readed = 0;
+            $msg->save();
+
+            notify()->success('Message Mark As UnRead');
+            // Pesan menjadi Belum Terbaca/UnReaded
         }
         return redirect()->route('message.index');
     }
@@ -63,8 +74,10 @@ class MessageController extends Controller
     // Menghapus Pesan
     public function delete($id)
     {
-        MessageModel::delete_msg($id);
-        Session::flash('error', 'Message Deleted');
+        $msg = MessageModel::findOrFail($id);
+        $msg->delete();
+
+        notify()->success('Message Deleted');
         return redirect()->route('message.index');
     }
 }

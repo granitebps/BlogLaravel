@@ -12,14 +12,16 @@ class CategoryController extends Controller
     // Menampilkan list category
     public function index()
     {
-        $category = CategoryModel::get_category();
-        return view('admin.category.index', compact('category'));
+        $data['title'] = 'Category List';
+        $data['category'] = CategoryModel::all();
+        return view('admin.category.index')->with($data);
     }
 
     // Menampilkan halaman membuat category
     public function create()
     {
-        return view('admin.category.create');
+        $data['title'] = 'Create Category';
+        return view('admin.category.create')->with($data);
     }
 
     // Proses membuat category
@@ -29,17 +31,20 @@ class CategoryController extends Controller
             'category_name' => 'required'
         ]);
 
-        $request = $request->all();
-        CategoryModel::create_category($request);
-        Session::flash('success', 'Category Created');
+        CategoryModel::create([
+            'category_name' => $request->category_name,
+        ]);
+
+        notify()->success('Category Created');
         return redirect()->route('category.index');
     }
 
     // Menampilkan halaman edit category
     public function edit($id)
     {
-        $category = CategoryModel::get_category_id($id);
-        return view('admin.category.edit', compact('category'));
+        $data['title'] = 'Edit Category';
+        $data['category'] = CategoryModel::findOrFail($id);
+        return view('admin.category.edit')->with($data);
     }
 
     // Proses edit category
@@ -48,16 +53,26 @@ class CategoryController extends Controller
         $this->validate($request, [
             'category_name' => 'required'
         ]);
-        $request = $request->all();
-        CategoryModel::update_category($request, $id);
-        Session::flash('success', 'Category Updated');
+        $category = CategoryModel::findOrFail($id);
+        $category->update([
+            'category_name' => $request->category_name,
+        ]);
+
+        notify()->success('Category Updated');
         return redirect()->route('category.index');
     }
 
     // Menghapus category
     public function destroy($id)
     {
-        CategoryModel::delete_category($id);
+        $category = CategoryModel::findOrFail($id);
+        foreach ($category->post as $row) {
+            $post = PostModel::where('category_id', $id)->first();
+            $post->tags()->detach();
+            File::delete($row->featured);
+            $row->forceDelete();
+        }
+        $category->delete();
         Session::flash('error', 'Category Deleted');
         return redirect()->route('category.index');
     }

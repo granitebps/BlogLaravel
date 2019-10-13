@@ -13,7 +13,7 @@ return [
     |
  */
 
-    'failed' => 'The email or password do not match our records.',
+    'failed' => 'The username or password do not match our records.',
     'deleted' => 'The User Has Been Deleted',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

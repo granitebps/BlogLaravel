@@ -174,7 +174,7 @@
                 
                 <div class="col-six tab-full s-footer__about">
                         
-                    <h4>About {{\App\Models\Blog\SettingModel::get_setting()->site_name}}</h4>
+                    <h4>About Me</h4>
 
                     <div class="col-twelve">
                         <ul class="footer-social">
