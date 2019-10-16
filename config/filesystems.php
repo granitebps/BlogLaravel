@@ -67,6 +67,8 @@ return [
         'file-manager' => [
             'driver' => 'local',
             'root' => storage_path('app/public/file-manager'),
+            'url' => 'http://localhost:8000/storage/file-manager',
+            'visibility' => 'public',
         ],
 
     ],

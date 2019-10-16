@@ -9,9 +9,6 @@
         <div class="row narrow">
             <div class="col-full s-content__header" data-aos="fade-up">
                 <h1 class="display-1 display-1--with-line-sep">Contact Me</h1>
-                <p class="lead">
-                    {{$profile->profile->user_about}}
-                </p>
             </div>
         </div>
         
@@ -41,7 +38,7 @@
                     <h4>Get In Touch</h4>
 
                     <form name="cForm" id="cForm" class="contact-form" method="post" action="{{route('home.email')}}">
-                        {{ csrf_field() }}
+                        @csrf
                         <fieldset>
 
                             <div>

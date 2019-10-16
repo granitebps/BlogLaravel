@@ -50,6 +50,7 @@
         gtag('config', 'UA-133810181-1');
     </script>
 
+    @notify_css
 
 </head>
 
@@ -102,7 +103,6 @@
                 @endforeach
                 <li><a href="{{route('home.about')}}" title="">About</a></li>
                 <li><a href="{{route('home.contact')}}" title="">Contact</a></li>
-                <li><a href="{{route('home.portfolio')}}" title="">Portfolio</a></li>
             </ul> <!-- end header__nav -->
 
             <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
@@ -209,7 +209,7 @@
 
                     <div class="subscribe-form">
                         <form id="mc-form" class="group" method="POST" action="{{route('home.subs')}}">
-                            {{ csrf_field() }}
+                            @csrf
                             <input type="email" value="" name="subs" class="email" id="mc-email" placeholder="Email Address" required="">
                 
                             <input type="submit" name="subscribe" value="Send">
@@ -255,23 +255,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     {{-- Toastr --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
-    <script>
-        @if($errors->count() > 0)
-            @foreach($errors->all() as $error)
-                toastr.error("{{$error}}")
-            @endforeach
-        @endif
-        @if(Session::has('success'))
-            toastr.success("{{Session::get('success')}}")
-        @endif
-        @if(Session::has('error'))
-            toastr.error("{{Session::get('error')}}")
-        @endif
-    </script>
-
     {{-- Custom JS --}}
     @yield('script')
 
 </body>
-
+@notify_js
+@notify_render
 </html>

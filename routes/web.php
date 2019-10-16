@@ -51,6 +51,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // Hapus Subscriber
     Route::get('/subscriber/{id}', 'Blog\SubscriberController@destroy')->name('subs.destroy');
 
+    // Post
+    Route::get('/post', 'Blog\PostController@index')->name('post.index');
+    Route::get('/post/create', 'Blog\PostController@create')->name('post.create');
+    Route::post('/post', 'Blog\PostController@store')->name('post.store');
+    Route::get('/post/edit/{id}', 'Blog\PostController@edit')->name('post.edit');
+    Route::post('/post/edit/{id}', 'Blog\PostController@update')->name('post.update');
+    Route::get('/post/delete/{id}', 'Blog\PostController@destroy')->name('post.destroy');
     // Trashed Post
     Route::get('/post/trashed_post', 'Blog\PostController@trashed')->name('post.trashed');
     // Restored Post
@@ -79,5 +86,3 @@ Route::get('/contact', 'Blog\HomeController@contact')->name('home.contact');
 Route::post('/contact', 'Blog\HomeController@contact_email')->name('home.email');
 // Subscription
 Route::post('/subs', 'Blog\HomeController@subs')->name('home.subs');
-// Portfolio
-Route::get('/portfolio', 'Blog\HomeController@portfolio')->name('home.portfolio');

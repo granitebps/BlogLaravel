@@ -18,8 +18,8 @@
 	<link rel="stylesheet" href="{{asset('admin/dist/css/adminlte.min.css')}}">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-	{{-- Toastr --}}
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+	{{-- File Manager --}}
+	<link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
 	{{-- Notify --}}
 	@notify_css
 	@yield('style')
@@ -75,31 +75,20 @@
 	<script src="{{asset('admin/plugins/fastclick/fastclick.js')}}"></script>
 	<!-- AdminLTE App -->
 	<script src="{{asset('admin/dist/js/adminlte.min.js')}}"></script>
-	{{-- Toastr --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 	
 	{{-- SweetAlert --}}
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 	
-	{{-- CKEditor --}}
-	<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>	
+	{{-- File Manager --}}
+	<script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
 	
-	{{-- Toastr --}}
-	<script>
-		@if($errors->count() > 0)
-		@foreach($errors->all() as $error)
-		toastr.error("{{$error}}")
+	{{-- Notify --}}
+	@if ($errors->count() > 0)
+		@foreach ($errors->all() as $error)
+			{{notify()->error($error)}}
 		@endforeach
-		@endif
-		@if(Session::has('success'))
-		toastr.success("{{Session::get('success')}}")
-		@endif
-		@if(Session::has('error'))
-		toastr.error("{{Session::get('error')}}")
-		@endif
-	</script>
-	
-	{{-- CKEditor --}}
+	@endif
+
 	@yield('script')
 </body>
 @notify_js

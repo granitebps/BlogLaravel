@@ -28,11 +28,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_name' => 'required'
+            'category_name' => 'required|string|max:191'
         ]);
 
         CategoryModel::create([
             'category_name' => $request->category_name,
+            'category_slug' => str_slug($request->category_name),
         ]);
 
         notify()->success('Category Created');
@@ -51,11 +52,12 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'category_name' => 'required'
+            'category_name' => 'required|string|max:191'
         ]);
         $category = CategoryModel::findOrFail($id);
         $category->update([
             'category_name' => $request->category_name,
+            'category_slug' => str_slug($request->category_name),
         ]);
 
         notify()->success('Category Updated');
@@ -73,7 +75,7 @@ class CategoryController extends Controller
             $row->forceDelete();
         }
         $category->delete();
-        Session::flash('error', 'Category Deleted');
+        notify()->success('Category Deleted');
         return redirect()->route('category.index');
     }
 }

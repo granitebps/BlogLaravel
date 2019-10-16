@@ -13,6 +13,7 @@
                         <thead>
                             <tr>
                                 <th>Post Title</th>
+                                <th>Category</th>
                                 <th>Tag</th>
                                 <th>Created At</th>
                                 <th>Deleted At</th>
@@ -25,6 +26,7 @@
                             @foreach ($post as $row)
                             <tr>
                                 <td>{{$row->post_title}}</td>
+                                <td>{{$row->category->category_name}}</td>
                                 <td>
                                     @foreach ($row->tags as $tag)
                                     {{$tag->tag_name. ', '}}

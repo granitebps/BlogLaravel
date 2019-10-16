@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\SubsciberEmail;
 use App\Models\Blog\CategoryModel;
+use App\Models\Blog\EmailModel;
 use App\Models\Blog\PostModel;
 use App\Models\Blog\TagModel;
-// use App\Models\Blog\EmailModel;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-
-// use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -46,6 +46,7 @@ class PostController extends Controller
             'post_title' => 'required|string|max:191',
             'post_content' => 'required',
             'tag' => 'required',
+            'category_id' => 'required',
             'featured' => 'required|image|max:2048'
         ]);
 
@@ -60,7 +61,7 @@ class PostController extends Controller
 
         $featured = $request->featured;
         $featured_name = time() . $featured->getClientOriginalName();
-        Storage::putFileAs('public/images/post', $featured, $featured_name);
+        Storage::putFileAs('public/images/posts', $featured, $featured_name);
 
         $user = auth()->id();
         $post = PostModel::create([
@@ -68,39 +69,26 @@ class PostController extends Controller
             'post_content' => $request->post_content,
             'post_slug' => str_slug($request->post_title),
             'featured' => $featured_name,
+            'category_id' => $request->category_id,
             'user_id' => $user,
         ]);
-        $post->tags()->attach($tag_id);
+        $post->tags()->sync($tag_id);
 
-        // // Kirim Email Setelah membuat post
-        // $data = array(
-        //     'post' => $request['post_title'],
-        //     'slug' => str_slug($request['post_title']),
-        //     'email' => EmailModel::all()
-        // );
-
-        // foreach ($data['email'] as $item) {
-        //     Mail::send('email', $data, function ($mail) use ($data, $item) {
-        //         $mail->to($item->email, 'GBPS')
-        //             ->subject('New Post');
-        //         $mail->from('granitebagas28@gmail.com', 'Website MyMind');
-        //     });
+        // $subs = EmailModel::all();
+        // foreach ($subs as $key => $value) {
+        //     Mail::to($value->email)->send(new SubsciberEmail($post));
         // }
 
-        // if (Mail::failures()) {
-        //     Session::flash('error', 'Email Gagal Dikirim');
-        // }
-        // Session::flash('success', 'Email Berhasil Dikirim');
-
-        Session::flash('success', 'Post Created');
+        notify()->success('Post Created');
         return redirect()->route('post.index');
     }
 
     // Menampilkan halaman edit post
     public function edit($id)
     {
-        $data['post'] = PostModel::get_post_id($id);
-        $data['tag_all'] = TagModel::get_tag();
+        $data['post'] = PostModel::findOrFail($id);
+        $data['tag_all'] = TagModel::all();
+        $data['category'] = CategoryModel::all();
         $data['title'] = 'Edit Post';
 
         return view('admin.post.edit')->with($data);
@@ -115,24 +103,45 @@ class PostController extends Controller
             'tag' => 'required',
             'featured' => 'image|max:2048'
         ]);
+        $post = PostModel::findOrFail($id);
         if ($request->hasFile('featured')) {
             $featured = $request->featured;
             $featured_name = time() . $featured->getClientOriginalName();
             $featured->move('storage/images/posts', $featured_name);
             // $featured->storeAs('public/images/posts', $featured_name);
-            PostModel::update_featured($featured_name, $id);
+
+            // Pada saat update image post, image lama akan terhapus
+            File::delete('storage/images/posts/' . $post->featured);
+            $post->featured = $featured_name;
+            $post->save();
         }
-        $request = $request->all();
-        PostModel::update_post($request, $id);
-        Session::flash('success', 'Post Updated');
+        $post->post_title = $request->post_title;
+        $post->post_content = $request->post_content;
+        $post->post_slug = str_slug($request->post_title);
+        $post->category_id = $request->category_id;
+
+        foreach ($request->tag as $index => $item) {
+            $tag_slug = str_slug($item);
+            $tag = TagModel::firstOrCreate([
+                'tag_name' => $item,
+                'tag_slug' => $tag_slug
+            ]);
+            $tag_id[$index] = $tag->tag_id;
+        }
+
+        $post->tags()->sync($tag_id);
+        $post->save();
+
+        notify()->success('Post Updated');
         return redirect()->route('post.index');
     }
 
     // Fungsi hapus/trash post
     public function destroy($id)
     {
-        PostModel::delete_post($id);
-        Session::flash('error', 'Post Trashed');
+        $post = PostModel::findOrFail($id);
+        $post->delete();
+        notify()->success('Post Trashed');
         return redirect()->route('post.index');
     }
 
@@ -140,23 +149,26 @@ class PostController extends Controller
     public function trashed()
     {
         $data['title'] = 'Trashed Post';
-        $data['post'] = PostModel::trashed_post();
+        $data['post'] = PostModel::onlyTrashed()->get();
         return view('admin.post.trashed')->with($data);
     }
 
     // Proses restore post
     public function restored($id)
     {
-        PostModel::restore($id);
-        Session::flash('success', 'Post Restored');
+        PostModel::withTrashed()->where('post_id', $id)->restore();
+        notify()->success('Post Restored');
         return redirect()->route('post.index');
     }
 
     // Menghapus post secara permanen
     public function killed($id)
     {
-        PostModel::killed($id);
-        Session::flash('error', 'Post Permanently Deleted');
+        $post = PostModel::onlyTrashed()->where('post_id', $id)->first();
+        File::delete('storage/images/posts/' . $post->featured);
+        $post->tags()->detach();
+        $post->forceDelete();
+        notify()->success('Post Permanently Deleted');
         return redirect()->route('post.trashed');
     }
 
@@ -164,10 +176,17 @@ class PostController extends Controller
     public function drafted($id)
     {
         // Default post yang terpublish -> publish == 1
-        if (PostModel::draft($id)) {
-            Session::flash('success', 'Post Save As Draft');
+        $post = PostModel::findOrFail($id);
+        if ($post->publish == 1) {
+            $post->publish = 0;
+            $post->save();
+            notify()->success('Post Drafted');
+            // Post menjadi draft
         } else {
-            Session::flash('success', 'Post Published');
+            $post->publish = 1;
+            $post->save();
+            notify()->success('Post Published');
+            // Post menjadi publish
         }
         return redirect()->route('post.index');
     }

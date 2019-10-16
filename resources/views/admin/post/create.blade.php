@@ -26,11 +26,11 @@
                         </div>
                         <div class="form-group">
                             <label>Post Content</label>
-                            <textarea name="post_content" id='article-ckeditor' cols="30" rows="10">{{$errors->isEmpty() ? '' : old('post_content')}}</textarea>
+                            <textarea name="post_content" cols="30" rows="10">{{$errors->isEmpty() ? '' : old('post_content')}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select name="category" id="category" class="form-control">
+                            <select name="category_id" id="category" class="form-control">
                                 <option value="" disabled selected>-- Select Category --</option>
                                 @foreach ($category as $item)
                                     <option value="{{$item->category_id}}">{{$item->category_name}}</option>
@@ -57,17 +57,13 @@
 @endsection
 
 @section('script')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script> --}}
-    <script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('post_content', {filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
-
-        $(document).ready(function() {
-            $("#tag").select2({
-                tags: true,
-                tokenSeparators: [',', ' ']
-            });
-        });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('post_content', {filebrowserImageBrowseUrl: '/file-manager/ckeditor',height: '700px',});
+    $("#tag").select2({
+        tags: true,
+        tokenSeparators: [',', ' ']
     });
 </script>
 @endsection

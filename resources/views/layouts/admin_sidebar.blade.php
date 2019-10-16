@@ -129,14 +129,6 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a href="{{route('task.index')}}" class="nav-link {{request()->is('admin/task*') ? 'active' : ''}}">
-						<i class="nav-icon fa fa-tasks fa-fw"></i>
-						<p>
-							Task
-						</p>
-					</a>
-				</li>
-				<li class="nav-item">
 					<a href="{{route('home')}}" class="nav-link" data-toggle="modal" data-target="#logoutModal">
 						<i class="nav-icon fas fa-sign-out-alt"></i>
 						<p>

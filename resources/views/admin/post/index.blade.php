@@ -14,6 +14,7 @@
                             <tr>
                                 <th>Post Title</th>
                                 <th>Author</th>
+                                <th>Category</th>
                                 <th>Tag</th>
                                 <th>Created At</th>
                                 <th>Status</th>
@@ -24,29 +25,28 @@
                             @if ($post->count() > 0)
                             
                             @foreach ($post as $row)
-                            <tr class="{{($row->publish == 1) ? '' : 'bg-info'}}">
+                            <tr>
                                 <td>{{$row->post_title}}</td>
                                 <td>{{$row->user->name}}</td>
+                                <td>{{$row->category->category_name}}</td>
                                 <td>
                                     @foreach ($row->tags as $tag)
                                     {{$tag->tag_name. ', '}}
                                     @endforeach
                                 </td>
-                                <td>{{date('j F Y', strtotime($row->created_at))}}</td>
-                                <td class="text-center">
-                                    @if ($row->publish == 1)
-                                    Published
+                                <td>{{\Carbon\Carbon::parse($row->created_at)->format('d F Y, H:i')}}</td>
+                                @if ($row->publish == 1)
+                                    <td class="table-success">
+                                        Published
+                                    </td>
                                     @else
-                                    Draft
+                                    <td class="table-primary">
+                                        Draft
+                                    </td>
                                     @endif
-                                </td>
                                 <td class="text-center"><a href="{{route('post.edit', ['id'=>$row->post_id])}}" class="btn btn-primary">Edit</a></td>
                                 <td class="text-center">
-                                    <form action="{{route('post.destroy', ['id'=>$row->post_id])}}" method="post">
-                                        {{ csrf_field() }}
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger">Trash</button>
-                                    </form>
+                                    <a href="{{route('post.destroy', ['id'=>$row->post_id])}}" class="btn btn-danger">Trash</a>
                                 </td>
                                 <td class="text-center">
                                     @if ($row->publish == 1)
@@ -60,7 +60,7 @@
                             
                             @else
                             <tr>
-                                <td colspan="6" class="text-center text-danger">No Post Found</td>
+                                <td colspan="7" class="text-center text-danger">No Post Found</td>
                             </tr>
                             @endif
                         </tbody>
