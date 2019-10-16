@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\EmailSubscribe;
 use App\Mail\SubsciberEmail;
 use App\Models\Blog\CategoryModel;
 use App\Models\Blog\EmailModel;
@@ -74,10 +75,10 @@ class PostController extends Controller
         ]);
         $post->tags()->sync($tag_id);
 
-        // $subs = EmailModel::all();
-        // foreach ($subs as $key => $value) {
-        //     Mail::to($value->email)->send(new SubsciberEmail($post));
-        // }
+        $subs = EmailModel::all();
+        foreach ($subs as $key => $value) {
+            EmailSubscribe::dispatch($post, $value);
+        }
 
         notify()->success('Post Created');
         return redirect()->route('post.index');

@@ -3,7 +3,7 @@
 	<a href="/" class="brand-link">
 		<img src="{{asset('admin/images/logo.png')}}" class="brand-image img-circle elevation-3"
 		style="opacity: .8">
-		<span class="brand-text font-weight-light">{{\App\Models\Blog\User::first()->name}}</span>
+		<span class="brand-text font-weight-light">{{auth()->user()->name}}</span>
 	</a>
 	
 	<!-- Sidebar -->
